@@ -125,3 +125,21 @@ window.updateDisplay = function() {
 `;
     document.head.appendChild(style);
 })();
+
+// prevent images from being selected or dragged via CSS
+(function injectDragPrevention(){
+        const style = document.createElement('style');
+        style.textContent = `
+img {
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.falling-money {
+    pointer-events: none; /* allow clicks through particle images */
+}
+`;
+        document.head.appendChild(style);
+})();
