@@ -40,62 +40,96 @@
             </div>
         </div>
 
-        <!-- Right side - Upgrades -->
-        <div class="upgrade-panel">
-            <div class="upgrade-title-wrapper">
-                <div class="upgrade-pill">
-                    <h2>Upgrades</h2>
+        <!-- Right side - Menu Zone -->
+        <div class="menu-container">
+            <div class="upgrade-panel">
+                <div class="upgrade-title-wrapper">
+                    <div class="upgrade-pill">
+                        <h2>Upgrades</h2>
+                    </div>
+                </div>
+                <div class="upgrade-section">
+                    <div class="upgrade-item">
+                        <h3>Training Boost</h3>
+                        <p>Increase money per click</p>
+                        <div class="upgrade-cost">
+                            <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
+                            <span>10</span>
+                        </div>
+                        <button class="upgrade-btn" onclick="buyUpgrade('clickPower')">Buy</button>
+                    </div>
+                    
+                    <div class="upgrade-item">
+                        <h3>Auto Training</h3>
+                        <p>Gain money automatically</p>
+                        <div class="upgrade-cost">
+                            <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
+                            <span>50</span>
+                        </div>
+                        <button class="upgrade-btn" onclick="buyUpgrade('autoClick')">Buy</button>
+                    </div>
+                    
+                    <div class="upgrade-item">
+                        <h3>Speed Training</h3>
+                        <p>Faster auto money generation</p>
+                        <div class="upgrade-cost">
+                            <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
+                            <span>100</span>
+                        </div>
+                        <button class="upgrade-btn" onclick="buyUpgrade('autoSpeed')">Buy</button>
+                    </div>
+                    
+                    <div class="upgrade-item">
+                        <h3>Carat Chance</h3>
+                        <p>Increase chance to drop carats on click</p>
+                        <div class="upgrade-cost">
+                            <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
+                            <span id="caratChanceCost">200</span>
+                        </div>
+                        <button class="upgrade-btn" onclick="buyUpgrade('caratChance')">Buy</button>
+                    </div>
+
+                    <div class="upgrade-item">
+                        <h3>Carat Amount</h3>
+                        <p>Increase amount of carats spawned when dropped</p>
+                        <div class="upgrade-cost">
+                            <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
+                            <span id="caratAmountCost">300</span>
+                        </div>
+                        <button class="upgrade-btn" onclick="buyUpgrade('caratAmount')">Buy</button>
+                    </div>
                 </div>
             </div>
-            <div class="upgrade-section">
-                <div class="upgrade-item">
-                    <h3>Training Boost</h3>
-                    <p>Increase money per click</p>
-                    <div class="upgrade-cost">
-                        <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
-                        <span>10</span>
-                    </div>
-                    <button class="upgrade-btn" onclick="buyUpgrade('clickPower')">Buy</button>
+            
+            <!-- Navigation Column -->
+            <div class="nav-column">
+                <div class="nav-button" onclick="switchTab('jukebox')">
+                    <div class="nav-button-icon">🎵</div>
+                    <div class="nav-button-text">Jukebox</div>
                 </div>
-                
-                <div class="upgrade-item">
-                    <h3>Auto Training</h3>
-                    <p>Gain money automatically</p>
-                    <div class="upgrade-cost">
-                        <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
-                        <span>50</span>
-                    </div>
-                    <button class="upgrade-btn" onclick="buyUpgrade('autoClick')">Buy</button>
+                <div class="nav-button active" onclick="switchTab('upgrades')">
+                    <div class="nav-button-icon">⬆️</div>
+                    <div class="nav-button-text">Upgrades</div>
                 </div>
-                
-                <div class="upgrade-item">
-                    <h3>Speed Training</h3>
-                    <p>Faster auto money generation</p>
-                    <div class="upgrade-cost">
-                        <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
-                        <span>100</span>
-                    </div>
-                    <button class="upgrade-btn" onclick="buyUpgrade('autoSpeed')">Buy</button>
+                <div class="nav-button" onclick="switchTab('store')">
+                    <div class="nav-button-icon">🛒</div>
+                    <div class="nav-button-text">Store</div>
                 </div>
-                
-                <div class="upgrade-item">
-                    <h3>Carat Chance</h3>
-                    <p>Increase chance to drop carats on click</p>
-                    <div class="upgrade-cost">
-                        <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
-                        <span id="caratChanceCost">200</span>
-                    </div>
-                    <button class="upgrade-btn" onclick="buyUpgrade('caratChance')">Buy</button>
+                <div class="nav-button" onclick="switchTab('races')">
+                    <div class="nav-button-icon">🏆</div>
+                    <div class="nav-button-text">Races</div>
                 </div>
-
-                <div class="upgrade-item">
-                    <h3>Carat Amount</h3>
-                    <p>Increase amount of carats spawned when dropped</p>
-                    <div class="upgrade-cost">
-                        <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
-                        <span id="caratAmountCost">300</span>
-                    </div>
-                    <button class="upgrade-btn" onclick="buyUpgrade('caratAmount')">Buy</button>
+                <div class="nav-button" onclick="switchTab('logs')">
+                    <div class="nav-button-icon">📝</div>
+                    <div class="nav-button-text">Logs</div>
+                </div>
+                <div class="nav-button" onclick="switchTab('stats')">
+                    <div class="nav-button-icon">📊</div>
+                    <div class="nav-button-text">Stats</div>
+                </div>
+                <div class="nav-button" onclick="switchTab('menu')">
+                    <div class="nav-button-icon">☰</div>
+                    <div class="nav-button-text">Menu</div>
                 </div>
             </div>
         </div>
@@ -152,6 +186,7 @@
 
     <script src="game/js/state.js"></script>
     <script src="game/js/characterSelection.js"></script>
+    <script src="game/js/navigation.js"></script>
     <script src="game/js/background.js"></script>
     <script src="game/js/animations.js"></script>
     <script src="game/js/upgrades/logic.js"></script>
