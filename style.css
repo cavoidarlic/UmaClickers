@@ -231,6 +231,17 @@ body {
     100% { opacity: 0; transform: translate(-50%, -50%) translateY(-80px) scale(0.8); }
 }
 
+/* Falling money style (used by JS physics) */
+.falling-money {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    will-change: left, top, transform, opacity;
+    z-index: 1000;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .game-container {

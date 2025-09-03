@@ -108,8 +108,11 @@ function clickCharacter(event) {
     // Visual feedback - sprite swap
     haruUrara.src = clickedSprite;
 
-    // Create floating money image at cursor position
-    createFloatingMoney(event.clientX, event.clientY);
+    // Create falling money image that jumps out from the character and falls to the ground
+    const rect = haruUrara.getBoundingClientRect();
+    const startX = rect.left + rect.width / 2;
+    const startY = rect.top + rect.height / 2;
+    createFallingMoney(startX, startY, gameState.clickPower);
 
     // Reset sprite after animation
     setTimeout(() => {
@@ -123,19 +126,67 @@ function clickCharacter(event) {
 }
 
 // Create floating number animation
-function createFloatingMoney(x, y) {
-    const img = document.createElement('img');
-    img.src = 'assets/images/items/Monies.png';
-    img.className = 'floating-money';
-    img.style.left = x + 'px';
-    img.style.top = y + 'px';
+function createFallingMoney(x, y, count = 1) {
+    const gamePanel = document.querySelector('.game-panel');
+    const panelRect = gamePanel.getBoundingClientRect();
 
-    document.body.appendChild(img);
+    for (let i = 0; i < Math.max(1, count); i++) {
+        const img = document.createElement('img');
+        img.src = 'assets/images/items/Monies.png';
+        img.className = 'falling-money';
+        img.style.left = x + 'px';
+        img.style.top = y + 'px';
+        img.style.transform = 'translate(-50%, -50%)';
+        document.body.appendChild(img);
 
-    // Remove after animation
-    setTimeout(() => {
-        if (img.parentElement) img.parentElement.removeChild(img);
-    }, 900);
+    // initial velocities (px per second) - reduced ranges to avoid large overshoot
+    const vx = (Math.random() * 160 - 80); // left or right, smaller
+    const vy = -(260 + Math.random() * 140); // upward
+    const gravity = 1200; // px/s^2
+
+        let posX = x;
+        let posY = y;
+        let velX = vx;
+        let velY = vy;
+        let last = performance.now();
+
+        // compute landing spot near character's legs
+        const charRect = haruUrara.getBoundingClientRect();
+        const side = Math.random() < 0.5 ? -1 : 1;
+        const landingX = charRect.left + charRect.width / 2 + side * (20 + Math.random() * (charRect.width / 3));
+        const landingY = charRect.bottom - 10;
+
+        function step(now) {
+            const dt = (now - last) / 1000; // seconds
+            last = now;
+
+            // integrate without steering to avoid huge horizontal jumps
+            velY += gravity * dt;
+            posX += velX * dt;
+            posY += velY * dt;
+
+            img.style.left = posX + 'px';
+            img.style.top = posY + 'px';
+
+            // check for landing near character legs
+            if (posY >= landingY) {
+                // smoothly move to landing spot to avoid teleportation
+                img.style.transition = 'left 220ms ease-out, top 220ms ease-out, transform 220ms ease-out, opacity 400ms ease-out';
+                img.style.left = landingX + 'px';
+                img.style.top = landingY + 'px';
+                img.style.transform = 'translate(-50%, 0) scale(0.95)';
+                img.style.opacity = '0.95';
+                setTimeout(() => {
+                    if (img.parentElement) img.parentElement.removeChild(img);
+                }, 600);
+                return;
+            }
+
+            requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
+    }
 }
 
 // Update display
