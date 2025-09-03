@@ -4,8 +4,17 @@
     box-sizing: border-box;
 }
 
+/* Load custom font */
+@font-face {
+    font-family: 'New Lincoln Gothic';
+    src: url('../../assets/fonts/New Lincoln Gothic BT W03 Md.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'New Lincoln Gothic', 'Arial', sans-serif;
     background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
     min-height: 100vh;
     overflow-x: hidden;
