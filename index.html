@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uma Musume Clicker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Left side - Main Game -->
+        <div class="game-panel">
+            <div class="currency-display">
+                <img src="assets/images/items/Monies.png" alt="Money" class="currency-icon">
+                <span id="caratCount">0</span>
+            </div>
+            <div class="character-container">
+                <img 
+                    id="haruUrara" 
+                    src="assets/images/characters/default/HaruUraraChibi1.webp" 
+                    alt="Haru Urara" 
+                    class="character-sprite"
+                    onmouseenter="hoverEffect()"
+                    onmouseleave="resetHover()"
+                    onclick="clickCharacter(event)"
+                >
+            </div>
+        </div>
+
+        <!-- Right side - Upgrades -->
+        <div class="upgrade-panel">
+            <h2>Upgrades</h2>
+            <div class="upgrade-section">
+                <div class="upgrade-item">
+                    <h3>Training Boost</h3>
+                    <p>Increase money per click</p>
+                    <div class="upgrade-cost">
+                        <img src="assets/images/items/Money_GameIcon.png" alt="Money" class="cost-icon">
+                        <span>10</span>
+                    </div>
+                    <button class="upgrade-btn" onclick="buyUpgrade('clickPower')">Buy</button>
+                </div>
+                
+                <div class="upgrade-item">
+                    <h3>Auto Training</h3>
+                    <p>Gain money automatically</p>
+                    <div class="upgrade-cost">
+                        <img src="assets/images/items/Money_GameIcon.png" alt="Money" class="cost-icon">
+                        <span>50</span>
+                    </div>
+                    <button class="upgrade-btn" onclick="buyUpgrade('autoClick')">Buy</button>
+                </div>
+                
+                <div class="upgrade-item">
+                    <h3>Speed Training</h3>
+                    <p>Faster auto money generation</p>
+                    <div class="upgrade-cost">
+                        <img src="assets/images/items/Money_GameIcon.png" alt="Money" class="cost-icon">
+                        <span>100</span>
+                    </div>
+                    <button class="upgrade-btn" onclick="buyUpgrade('autoSpeed')">Buy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
