@@ -158,20 +158,46 @@ body {
 }
 
 /* Right Panel - Upgrades */
+
 .upgrade-panel {
     flex: 1;
-    background: linear-gradient(180deg, #ffecd2 0%, #fcb69f 100%);
+    background: #fff;
     padding: 2rem;
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
 }
 
-.upgrade-panel h2 {
+
+.upgrade-panel .upgrade-title-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2.2rem;
+}
+
+
+.upgrade-panel .upgrade-pill {
+    background: linear-gradient(90deg, #6fdc3a 0%, #3ecb1e 100%);
+    border-radius: 999px;
+    width: 75%;
+    min-width: 340px;
+    height: 3.3em;
+    padding: 0.2em 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 2px 12px rgba(60,220,60,0.10);
+}
+
+.upgrade-panel .upgrade-pill h2 {
+    color: #fff;
+    font-size: 2.1rem;
+    font-weight: 900;
+    margin: 0;
     text-align: center;
-    margin-bottom: 2rem;
-    color: #333;
-    font-size: 2rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 8px rgba(60,220,60,0.10);
 }
 
 .upgrade-section {
