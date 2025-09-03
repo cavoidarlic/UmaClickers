@@ -2,8 +2,21 @@
 
 const haruUrara = document.getElementById('haruUrara');
 
-const defaultSprite = 'assets/images/characters/default/HaruUraraChibi1.webp';
-const clickedSprite = 'assets/images/characters/default2/Haru_Urara_Chibi1-2.webp';
+// Get current character sprites based on selection
+function getCurrentSprites() {
+    const selectedChar = window.gameState.selectedCharacter;
+    if (selectedChar && window.characterData[selectedChar]) {
+        return {
+            default: window.characterData[selectedChar].defaultSprite,
+            clicked: window.characterData[selectedChar].clickedSprite
+        };
+    }
+    // Fallback to Haru Urara if no selection
+    return {
+        default: 'assets/images/characters/default/HaruUraraChibi1.webp',
+        clicked: 'assets/images/characters/default2/Haru_Urara_Chibi1-2.webp'
+    };
+}
 
 window.hoverEffect = function() {
     if (haruUrara) haruUrara.style.transform = 'scale(1.1)';
@@ -17,7 +30,8 @@ window.clickCharacter = function(event) {
     // award money
     window.gameState.money += window.gameState.clickPower;
 
-    if (haruUrara) haruUrara.src = clickedSprite;
+    const sprites = getCurrentSprites();
+    if (haruUrara) haruUrara.src = sprites.clicked;
 
     // Determine start coords: prefer mouse/touch position, fallback to character center
     let startX, startY;
@@ -57,7 +71,9 @@ window.clickCharacter = function(event) {
         if (spawnedCarats > 0) window.updateDisplay();
     }
 
-    setTimeout(() => { if (haruUrara) haruUrara.src = defaultSprite; }, 150);
+    setTimeout(() => { 
+        if (haruUrara) haruUrara.src = sprites.default; 
+    }, 150);
 
     window.updateDisplay();
     window.updateUpgradeButtons();

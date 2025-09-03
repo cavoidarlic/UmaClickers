@@ -101,7 +101,57 @@
         </div>
     </div>
 
+    <!-- Character Selection Modal -->
+    <div id="characterSelectionModal" class="character-selection-modal">
+        <div class="character-selection-content">
+            <h1 class="character-selection-title">Choose Your Uma Musume</h1>
+            <div class="character-grid">
+                <div class="character-option" onclick="selectCharacter('agnes')">
+                    <img class="default-image" src="assets/images/characters/icons/state1/AgnesTachyon_uniform.webp" alt="Agnes Tachyon">
+                    <img class="hover-image" src="assets/images/characters/icons/state2/AgnestachyonSF.webp" alt="Agnes Tachyon">
+                </div>
+                <div class="character-option" onclick="selectCharacter('haru')">
+                    <img class="default-image" src="assets/images/characters/icons/state1/HaraUrara_Uniform.webp" alt="Haru Urara">
+                    <img class="hover-image" src="assets/images/characters/icons/state2/HaruuraraSF.webp" alt="Haru Urara">
+                </div>
+                <div class="character-option" onclick="selectCharacter('king')">
+                    <img class="default-image" src="assets/images/characters/icons/state1/KingHalo_Uniform.webp" alt="King Halo">
+                    <img class="hover-image" src="assets/images/characters/icons/state2/KinghaloSF.webp" alt="King Halo">
+                </div>
+                <div class="character-option" onclick="selectCharacter('matikane')">
+                    <img class="default-image" src="assets/images/characters/icons/state1/Matikanefukukitaru.webp" alt="Matikanefukukitaru">
+                    <img class="hover-image" src="assets/images/characters/icons/state2/MatikanefukukitaruSF.webp" alt="Matikanefukukitaru">
+                </div>
+                <div class="character-option" onclick="selectCharacter('mejiro')">
+                    <img class="default-image" src="assets/images/characters/icons/state1/Mejiro_ryan.webp" alt="Mejiro Ryan">
+                    <img class="hover-image" src="assets/images/characters/icons/state2/MejiroryanSF.webp" alt="Mejiro Ryan">
+                </div>
+                <div class="character-option" onclick="selectCharacter('nice')">
+                    <img class="default-image" src="assets/images/characters/icons/state1/Nice_nature.webp" alt="Nice Nature">
+                    <img class="hover-image" src="assets/images/characters/icons/state2/NicenatureSF.webp" alt="Nice Nature">
+                </div>
+                <div class="character-option" onclick="selectCharacter('sakura')">
+                    <img class="default-image" src="assets/images/characters/icons/state1/SakuraBakushinOUniform.webp" alt="Sakura Bakushin O">
+                    <img class="hover-image" src="assets/images/characters/icons/state2/SakurabakushinoSF.webp" alt="Sakura Bakushin O">
+                </div>
+                <div class="character-option" onclick="selectCharacter('twin')">
+                    <img class="default-image" src="assets/images/characters/icons/state1/Twin_Turbo_Uniform.webp" alt="Twin Turbo">
+                    <img class="hover-image" src="assets/images/characters/icons/state2/Twin_Turbo_SF.webp" alt="Twin Turbo">
+                </div>
+                <div class="character-option" onclick="selectCharacter('winning')">
+                    <img class="default-image" src="assets/images/characters/icons/state1/Winning_ticket.webp" alt="Winning Ticket">
+                    <img class="hover-image" src="assets/images/characters/icons/state2/WinningticketSF.webp" alt="Winning Ticket">
+                </div>
+                <div class="character-option random-option" onclick="selectCharacter('random')">
+                    <img src="assets/images/characters/icons/tazuna.png" alt="Random Uma">
+                    <div class="random-text">Random Uma</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="game/js/state.js"></script>
+    <script src="game/js/characterSelection.js"></script>
     <script src="game/js/background.js"></script>
     <script src="game/js/animations.js"></script>
     <script src="game/js/upgrades/logic.js"></script>

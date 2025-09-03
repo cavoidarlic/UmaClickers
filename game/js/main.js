@@ -1,6 +1,9 @@
 // main.js - initializes game on load
 
 window.addEventListener('load', function() {
+    // Check if character selection is needed (for debug, always show)
+    window.checkCharacterSelection();
+    
     // load state first so other modules see it
     window.loadGameState();
     window.startBackgroundAutoUpdate();
