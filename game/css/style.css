@@ -467,8 +467,7 @@ body {
     }
     
     .random-option {
-        grid-column: span 3;
-        width: 100%;
+        width: 80px;
     }
     
     .character-selection-content {
