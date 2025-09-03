@@ -1,9 +1,17 @@
 // animations.js - floating money/carat animations and small utilities
+// particle limits to avoid too many DOM elements causing lag
+window.PARTICLE_LIMIT = 60; // max concurrent particles
+window.activeParticles = 0;
 
 window.createFallingMoney = function(x, y, count = 1) {
     const gamePanel = document.querySelector('.game-panel');
+    // clamp requested count to available particle slots
+    const requested = Math.max(1, Math.floor(count));
+    const available = Math.max(0, window.PARTICLE_LIMIT - window.activeParticles);
+    const spawnCount = Math.min(requested, available);
+    if (spawnCount <= 0) return 0;
 
-    for (let i = 0; i < Math.max(1, count); i++) {
+    for (let i = 0; i < spawnCount; i++) {
         const img = document.createElement('img');
         img.src = 'assets/images/items/Monies.png';
         img.className = 'falling-money';
@@ -11,6 +19,7 @@ window.createFallingMoney = function(x, y, count = 1) {
         img.style.top = y + 'px';
         img.style.transform = 'translate(-50%, -50%)';
         document.body.appendChild(img);
+        window.activeParticles++;
 
         const vx = (Math.random() * 160 - 80);
         const vy = -(260 + Math.random() * 140);
@@ -44,7 +53,7 @@ window.createFallingMoney = function(x, y, count = 1) {
                 img.style.top = landingY + 'px';
                 img.style.transform = 'translate(-50%, 0) scale(0.95)';
                 img.style.opacity = '0.95';
-                setTimeout(() => { if (img.parentElement) img.parentElement.removeChild(img); }, 600);
+                setTimeout(() => { if (img.parentElement) img.parentElement.removeChild(img); window.activeParticles = Math.max(0, window.activeParticles - 1); }, 600);
                 return;
             }
 
@@ -53,9 +62,13 @@ window.createFallingMoney = function(x, y, count = 1) {
 
         requestAnimationFrame(step);
     }
+    return spawnCount;
 };
 
 window.createFallingCarat = function(x, y) {
+    // respect global particle cap
+    if (window.activeParticles >= window.PARTICLE_LIMIT) return false;
+
     const img = document.createElement('img');
     img.src = 'assets/images/items/Carats.png';
     img.className = 'falling-money';
@@ -63,6 +76,7 @@ window.createFallingCarat = function(x, y) {
     img.style.top = y + 'px';
     img.style.transform = 'translate(-50%, -50%) scale(0.8)';
     document.body.appendChild(img);
+    window.activeParticles++;
 
     const vx = (Math.random() * 120 - 60);
     const vy = -(220 + Math.random() * 120);
@@ -96,7 +110,7 @@ window.createFallingCarat = function(x, y) {
             img.style.top = landingY + 'px';
             img.style.transform = 'translate(-50%, 0) scale(0.75)';
             img.style.opacity = '0.95';
-            setTimeout(() => { if (img.parentElement) img.parentElement.removeChild(img); }, 500);
+            setTimeout(() => { if (img.parentElement) img.parentElement.removeChild(img); window.activeParticles = Math.max(0, window.activeParticles - 1); }, 500);
             return;
         }
 
@@ -104,6 +118,7 @@ window.createFallingCarat = function(x, y) {
     }
 
     requestAnimationFrame(step);
+    return true;
 };
 
 // small helper for updating display

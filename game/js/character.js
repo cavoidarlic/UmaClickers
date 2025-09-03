@@ -42,14 +42,19 @@ window.clickCharacter = function(event) {
     // slight upward offset so the explosion looks natural under the cursor
     startY = startY - 8;
 
-    window.createFallingMoney(startX, startY, window.gameState.clickPower);
+    // Limit visuals per click to avoid spawning huge amounts; visual limit is separate from awarded money
+    const VISUAL_MONEY_PER_CLICK = 6;
+    const spawnCount = window.createFallingMoney(startX, startY, Math.min(window.gameState.clickPower, VISUAL_MONEY_PER_CLICK));
 
     if (Math.random() < window.gameState.caratChance) {
+        let spawnedCarats = 0;
         for (let i = 0; i < window.gameState.caratAmount; i++) {
-            window.createFallingCarat(startX, startY);
-            window.gameState.carats += 1;
+            const spawned = window.createFallingCarat(startX, startY);
+            if (spawned) spawnedCarats++;
         }
-        window.updateDisplay();
+        // only add carats to the account for actually-spawned visuals
+        window.gameState.carats += spawnedCarats;
+        if (spawnedCarats > 0) window.updateDisplay();
     }
 
     setTimeout(() => { if (haruUrara) haruUrara.src = defaultSprite; }, 150);
