@@ -23,6 +23,13 @@ let gameState = {
     }
 };
 
+// Carat system
+gameState.carats = 0;
+// base chance to drop carats on click (0.05 = 5%)
+gameState.caratChance = 0.05;
+gameState.caratAmount = 1; // how many carats spawn per drop
+// cost/upgrade details for carat upgrades will be managed in buyUpgrade
+
 // Background settings based on time
 function setBackgroundByTime() {
     const now = new Date();
@@ -114,6 +121,16 @@ function clickCharacter(event) {
     const startY = rect.top + rect.height / 2;
     createFallingMoney(startX, startY, gameState.clickPower);
 
+    // Chance to drop carats
+    if (Math.random() < gameState.caratChance) {
+        // spawn carat(s) near her leg visually using Monies image for now (could be carat image)
+        for (let i = 0; i < gameState.caratAmount; i++) {
+            createFallingCarat(startX, startY);
+            gameState.carats += 1;
+        }
+        updateDisplay();
+    }
+
     // Reset sprite after animation
     setTimeout(() => {
         haruUrara.src = defaultSprite;
@@ -189,9 +206,106 @@ function createFallingMoney(x, y, count = 1) {
     }
 }
 
+// create a visual carat drop (uses carat image) that falls to leg similarly
+function createFallingCarat(x, y) {
+    const img = document.createElement('img');
+    img.src = 'assets/images/items/carats.png';
+    img.className = 'falling-money';
+    img.style.left = x + 'px';
+    img.style.top = y + 'px';
+    img.style.transform = 'translate(-50%, -50%) scale(0.8)';
+    document.body.appendChild(img);
+
+    const vx = (Math.random() * 120 - 60);
+    const vy = -(220 + Math.random() * 120);
+    const gravity = 1200;
+
+    let posX = x;
+    let posY = y;
+    let velX = vx;
+    let velY = vy;
+    let last = performance.now();
+
+    const charRect = haruUrara.getBoundingClientRect();
+    const side = Math.random() < 0.5 ? -1 : 1;
+    const landingX = charRect.left + charRect.width / 2 + side * (10 + Math.random() * (charRect.width / 4));
+    const landingY = charRect.bottom - 6;
+
+    function step(now) {
+        const dt = (now - last) / 1000;
+        last = now;
+
+        velY += gravity * dt;
+        posX += velX * dt;
+        posY += velY * dt;
+
+        img.style.left = posX + 'px';
+        img.style.top = posY + 'px';
+
+        if (posY >= landingY) {
+            img.style.transition = 'left 180ms ease-out, top 180ms ease-out, transform 180ms ease-out, opacity 300ms ease-out';
+            img.style.left = landingX + 'px';
+            img.style.top = landingY + 'px';
+            img.style.transform = 'translate(-50%, 0) scale(0.75)';
+            img.style.opacity = '0.95';
+            setTimeout(() => { if (img.parentElement) img.parentElement.removeChild(img); }, 500);
+            return;
+        }
+
+        requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+}
+
+// Extend buyUpgrade to support caratChance and caratAmount
+const extraUpgrades = {
+    caratChance: { cost: 200, level: 0, costMultiplier: 1.9 },
+    caratAmount: { cost: 300, level: 0, costMultiplier: 2.2 }
+};
+
+function buyUpgrade(upgradeType) {
+    // existing upgrades
+    if (gameState.upgrades[upgradeType]) {
+        const upgrade = gameState.upgrades[upgradeType];
+        if (gameState.money >= upgrade.cost) {
+            gameState.money -= upgrade.cost;
+            upgrade.level++;
+            switch (upgradeType) {
+                case 'clickPower': gameState.clickPower++; break;
+                case 'autoClick': gameState.autoClickRate++; break;
+                case 'autoSpeed': gameState.autoClickSpeed = Math.max(100, gameState.autoClickSpeed - 100); restartAutoClicker(); break;
+            }
+            upgrade.cost = Math.floor(upgrade.cost * upgrade.costMultiplier);
+            updateDisplay(); updateUpgradeButtons(); saveGameState();
+        }
+        return;
+    }
+
+    // extra upgrades
+    if (extraUpgrades[upgradeType]) {
+        const u = extraUpgrades[upgradeType];
+        if (gameState.money >= u.cost) {
+            gameState.money -= u.cost;
+            u.level++;
+            if (upgradeType === 'caratChance') {
+                gameState.caratChance = Math.min(1, gameState.caratChance + 0.05);
+            } else if (upgradeType === 'caratAmount') {
+                gameState.caratAmount = gameState.caratAmount + 1;
+            }
+            u.cost = Math.floor(u.cost * u.costMultiplier);
+            updateDisplay(); updateUpgradeButtons(); saveGameState();
+        }
+        return;
+    }
+}
+
 // Update display
 function updateDisplay() {
-    caratCountElement.textContent = Math.floor(gameState.money);
+    const moneyEl = document.getElementById('moneyCount');
+    const caratEl = document.getElementById('caratCount');
+    moneyEl.textContent = Math.floor(gameState.money);
+    caratEl.textContent = Math.floor(gameState.carats);
 }
 
 // Buy upgrade function
@@ -244,6 +358,20 @@ function updateUpgradeButtons() {
     const autoSpeedCost = autoSpeedBtn.parentElement.querySelector('.upgrade-cost span');
     autoSpeedCost.textContent = gameState.upgrades.autoSpeed.cost;
     autoSpeedBtn.disabled = gameState.money < gameState.upgrades.autoSpeed.cost;
+
+    // Update extra upgrades
+    const caratChanceBtn = document.querySelector('[onclick="buyUpgrade(\'caratChance\')"]');
+    const caratAmountBtn = document.querySelector('[onclick="buyUpgrade(\'caratAmount\')"]');
+    if (caratChanceBtn) {
+        const el = caratChanceBtn.parentElement.querySelector('.upgrade-cost span');
+        el.textContent = extraUpgrades.caratChance.cost;
+        caratChanceBtn.disabled = gameState.money < extraUpgrades.caratChance.cost;
+    }
+    if (caratAmountBtn) {
+        const el2 = caratAmountBtn.parentElement.querySelector('.upgrade-cost span');
+        el2.textContent = extraUpgrades.caratAmount.cost;
+        caratAmountBtn.disabled = gameState.money < extraUpgrades.caratAmount.cost;
+    }
 }
 
 // Auto clicker functionality

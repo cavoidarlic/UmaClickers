@@ -47,6 +47,52 @@ body {
     z-index: 2;
 }
 
+/* Top center stats */
+.top-stats {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.6rem;
+    z-index: 3;
+}
+
+.parallelogram {
+    background: rgba(255,255,255,0.95);
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    transform: skewX(-20deg);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+.parallelogram .stat-icon {
+    width: 28px;
+    height: 28px;
+    transform: skewX(20deg);
+    margin-right: 0.5rem;
+}
+
+.parallelogram .stat-text {
+    transform: skewX(20deg);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.parallelogram .label {
+    font-size: 0.75rem;
+    color: #333;
+}
+
+.parallelogram .value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #222;
+}
+
 .currency-display {
     position: absolute;
     top: 2rem;

@@ -10,9 +10,21 @@
     <div class="game-container">
         <!-- Left side - Main Game -->
         <div class="game-panel">
-            <div class="currency-display">
-                <img src="assets/images/items/Monies.png" alt="Money" class="currency-icon">
-                <span id="caratCount">0</span>
+            <div class="top-stats">
+                <div class="parallelogram money-stat">
+                    <img src="assets/images/items/Monies.png" alt="Money" class="stat-icon">
+                    <div class="stat-text">
+                        <span class="label">Money</span>
+                        <span id="moneyCount" class="value">0</span>
+                    </div>
+                </div>
+                <div class="parallelogram carat-stat">
+                    <img src="assets/images/items/carats.png" alt="Carats" class="stat-icon">
+                    <div class="stat-text">
+                        <span class="label">Carats</span>
+                        <span id="caratCount" class="value">0</span>
+                    </div>
+                </div>
             </div>
             <div class="character-container">
                 <img 
@@ -59,6 +71,26 @@
                         <span>100</span>
                     </div>
                     <button class="upgrade-btn" onclick="buyUpgrade('autoSpeed')">Buy</button>
+                </div>
+                
+                <div class="upgrade-item">
+                    <h3>Carat Chance</h3>
+                    <p>Increase chance to drop carats on click</p>
+                    <div class="upgrade-cost">
+                        <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
+                        <span id="caratChanceCost">200</span>
+                    </div>
+                    <button class="upgrade-btn" onclick="buyUpgrade('caratChance')">Buy</button>
+                </div>
+
+                <div class="upgrade-item">
+                    <h3>Carat Amount</h3>
+                    <p>Increase amount of carats spawned when dropped</p>
+                    <div class="upgrade-cost">
+                        <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
+                        <span id="caratAmountCost">300</span>
+                    </div>
+                    <button class="upgrade-btn" onclick="buyUpgrade('caratAmount')">Buy</button>
                 </div>
             </div>
         </div>
