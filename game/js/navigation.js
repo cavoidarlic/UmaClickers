@@ -145,7 +145,7 @@ window.switchTab = function(tabName) {
     }
     
     // Update the content area
-    const contentArea = document.querySelector('.upgrade-panel');
+    const contentArea = document.querySelector('.menu-panel');
     const titleWrapper = contentArea.querySelector('.upgrade-title-wrapper');
     const contentSection = contentArea.querySelector('.upgrade-section');
 

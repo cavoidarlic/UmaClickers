@@ -1,5 +1,5 @@
 /* Scout tab full panel background */
-.upgrade-panel.scout-bg {
+.menu-panel.scout-bg {
     background: url('../../assets/images/scouting/background.png') center center/cover no-repeat !important;
 }
 /* Scout tab background and bottom buttons */
@@ -46,7 +46,7 @@ body {
 }
 
 /* Prevent selection and double-click text/image highlighting for the main game UI */
-html, body, .game-container, .upgrade-panel, .character-selection-content, .character-selection-modal {
+html, body, .game-container, .menu-panel, .character-selection-content, .character-selection-modal {
     -webkit-user-select: none; /* Safari/Chrome */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
@@ -199,7 +199,7 @@ html, body, .game-container, .upgrade-panel, .character-selection-content, .char
     align-items: stretch; /* ensure children fill available height */
 }
 
-.upgrade-panel {
+.menu-panel {
     flex: 1;
     background: #fff;
     padding: 2rem;
@@ -211,7 +211,7 @@ html, body, .game-container, .upgrade-panel, .character-selection-content, .char
 }
 
 /* Hide WebKit scrollbars (Chrome, Safari, newer Edge) for the upgrade panel */
-.upgrade-panel::-webkit-scrollbar {
+.menu-panel::-webkit-scrollbar {
     width: 0;
     height: 0;
 }
@@ -696,7 +696,7 @@ html, body, .game-container, .upgrade-panel, .character-selection-content, .char
 }
 
 
-.upgrade-panel .upgrade-title-wrapper {
+.menu-panel .upgrade-title-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -704,7 +704,7 @@ html, body, .game-container, .upgrade-panel, .character-selection-content, .char
 }
 
 
-.upgrade-panel .upgrade-pill {
+.menu-panel .upgrade-pill {
     background: linear-gradient(90deg, #6fdc3a 0%, #3ecb1e 100%);
     border-radius: 999px;
     width: 80%;
@@ -718,7 +718,7 @@ html, body, .game-container, .upgrade-panel, .character-selection-content, .char
     box-shadow: 0 2px 12px rgba(60,220,60,0.10);
 }
 
-.upgrade-panel .upgrade-pill h2 {
+.menu-panel .upgrade-pill h2 {
     color: #fff;
     font-size: 2.1rem;
     font-weight: 900;
@@ -995,7 +995,7 @@ html, body, .game-container, .upgrade-panel, .character-selection-content, .char
         min-height: 50vh;
     }
     
-    .upgrade-panel {
+    .menu-panel {
         flex: 1;
         min-height: 50vh;
     }
