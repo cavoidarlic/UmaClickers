@@ -1,6 +1,21 @@
 /* Scout tab full panel background */
 .menu-panel.scout-bg {
     background: url('../../assets/images/scouting/background.png') center center/cover no-repeat !important;
+    position: relative;
+}
+
+/* Scout title in top left corner */
+.menu-panel.scout-bg::before {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    left: 0rem;
+    width: 500px;
+    height: auto;
+    background: url('../../assets/images/scouting/scout title.png') no-repeat;
+    background-size: contain;
+    aspect-ratio: 3/1; /* Adjust based on your image's aspect ratio */
+    z-index: 10;
 }
 /* Scout tab background and bottom buttons */
 .scout-bg {
