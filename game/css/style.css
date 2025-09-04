@@ -158,9 +158,11 @@ body {
 }
 
 /* Right Panel - Menu Zone */
+
 .menu-container {
     display: flex;
     flex: 1;
+    align-items: stretch; /* ensure children fill available height */
 }
 
 .upgrade-panel {
@@ -173,60 +175,56 @@ body {
 
 /* Navigation Column */
 .nav-column {
-    width: 80px;
-    background: linear-gradient(180deg, #f0f0f0 0%, #e0e0e0 100%);
-    border-left: 2px solid #ddd;
+    width: 120px; /* larger nav column */
+    background: linear-gradient(180deg, #f7f7f7 0%, #ececec 100%);
+    border-left: 2px solid #e6e6e6;
     display: flex;
     flex-direction: column;
-    padding: 1rem 0.5rem;
-    gap: 0.8rem;
-    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    gap: 12px;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.06);
 }
 
 .nav-button {
-    width: 60px;
-    height: 60px;
-    background: #fff;
-    border: 2px solid #ddd;
-    border-radius: 12px;
+    width: 100%;
+    flex: 1; /* fill available vertical space evenly */
+    background: transparent; /* not a button */
+    border: none;
+    border-radius: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: #555;
+    transition: color 0.18s ease, background-color 0.12s ease;
+    font-size: 0.95rem; /* slightly larger */
+    font-weight: 800;
+    color: #444;
     text-align: center;
-    line-height: 1.1;
-    padding: 0.3rem;
+    padding: 10px 6px;
     box-sizing: border-box;
+    border-bottom: 1px solid rgba(0,0,0,0.06); /* thin separator */
 }
 
 .nav-button:hover {
-    background: #f8f9fa;
-    border-color: #6fdc3a;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(111, 220, 58, 0.2);
+    color: #2d6f2a;
+    background-color: rgba(111,220,58,0.04);
 }
 
 .nav-button.active {
-    background: linear-gradient(135deg, #6fdc3a 0%, #3ecb1e 100%);
-    border-color: #3ecb1e;
-    color: #fff;
-    transform: translateY(-1px);
-    box-shadow: 0 3px 10px rgba(111, 220, 58, 0.3);
+    color: #1b5e20;
+    background-color: rgba(62,203,30,0.08);
 }
 
 .nav-button-icon {
-    font-size: 1.2rem;
-    margin-bottom: 0.2rem;
+    font-size: 1.6rem; /* larger icon */
+    margin-bottom: 6px;
 }
 
 .nav-button-text {
-    font-size: 0.65rem;
-    font-weight: 600;
+    font-size: 1.05rem; /* larger label */
+    font-weight: 800;
+    line-height: 1.05;
 }
 
 /* Tab Content Styles */
@@ -559,9 +557,10 @@ body {
     }
     
     .nav-button {
-        width: 45px;
-        height: 45px;
+        width: 100%;
+        flex: 1;
         font-size: 0.6rem;
+        padding: 6px;
     }
     
     .nav-button-icon {
