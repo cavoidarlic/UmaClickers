@@ -30,6 +30,26 @@ window.clickCharacter = function(event) {
     // award money
     window.gameState.money += window.gameState.clickPower;
 
+    // play click sound (small audio pool to avoid cutoffs)
+    try {
+        if (!window.clickSoundPool) {
+            window.clickSoundPool = [];
+            window.clickSoundIndex = 0;
+            for (let i = 0; i < 3; i++) {
+                const a = new Audio('assets/sounds/Click/shimmerClick.mp3');
+                a.volume = 0.9;
+                window.clickSoundPool.push(a);
+            }
+        }
+        const snd = window.clickSoundPool[window.clickSoundIndex % window.clickSoundPool.length];
+        // rewind and play
+        try { snd.currentTime = 0; } catch (e) {}
+        snd.play().catch(() => {});
+        window.clickSoundIndex++;
+    } catch (err) {
+        console.warn('Click sound failed:', err);
+    }
+
     const sprites = getCurrentSprites();
     if (haruUrara) haruUrara.src = sprites.clicked;
 
