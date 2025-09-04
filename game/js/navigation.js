@@ -4,6 +4,7 @@ window.currentTab = 'upgrades'; // default tab
 window.currentSong = 'Go This Way'; // default selected song
 window.isPlaying = false;
 window.currentAudio = null;
+window.currentlyPlayingSong = null; // track which song is actually playing
 
 // Song data
 window.songData = {
@@ -67,12 +68,6 @@ window.songData = {
 
 window.selectSong = function(songName) {
     window.currentSong = songName;
-    // Stop current audio if playing
-    if (window.currentAudio) {
-        window.currentAudio.pause();
-        window.currentAudio = null;
-    }
-    window.isPlaying = false;
     
     // Update the jukebox display if currently on jukebox tab
     if (window.currentTab === 'jukebox') {
@@ -84,16 +79,28 @@ window.selectSong = function(songName) {
 window.togglePlayback = function() {
     const song = window.songData[window.currentSong];
     if (!song) return;
-    
+    // If something is playing
     if (window.isPlaying) {
-        // Stop playback
-        if (window.currentAudio) {
-            window.currentAudio.pause();
-            window.currentAudio = null;
+        // If the currently playing song is the same as the selected one -> stop
+        if (window.currentlyPlayingSong === window.currentSong) {
+            if (window.currentAudio) {
+                window.currentAudio.pause();
+                window.currentAudio = null;
+            }
+            window.isPlaying = false;
+            window.currentlyPlayingSong = null;
+        } else {
+            // Different song is selected while another is playing -> stop the current playback
+            // (do not auto-start the newly selected song)
+            if (window.currentAudio) {
+                window.currentAudio.pause();
+                window.currentAudio = null;
+            }
+            window.isPlaying = false;
+            window.currentlyPlayingSong = null;
         }
-        window.isPlaying = false;
     } else {
-        // Start playback
+        // Nothing is playing -> start the selected song
         window.currentAudio = new Audio(song.file);
         window.currentAudio.play().catch(error => {
             console.error('Error playing audio:', error);
@@ -101,10 +108,12 @@ window.togglePlayback = function() {
             return;
         });
         window.isPlaying = true;
-        
+        window.currentlyPlayingSong = window.currentSong;
+
         // Reset when song ends
         window.currentAudio.addEventListener('ended', function() {
             window.isPlaying = false;
+            window.currentlyPlayingSong = null;
             if (window.currentTab === 'jukebox') {
                 const contentSection = document.querySelector('.upgrade-section');
                 contentSection.innerHTML = getTabContent('jukebox');
