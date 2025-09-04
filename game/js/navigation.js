@@ -149,16 +149,17 @@ window.switchTab = function(tabName) {
     const titleWrapper = contentArea.querySelector('.upgrade-title-wrapper');
     const contentSection = contentArea.querySelector('.upgrade-section');
 
-    // Set scout-bg class for Scout tab background
+    // Set scout-bg class for Scout tab background and hide title for Scout
     if (tabName === 'scout') {
         contentArea.classList.add('scout-bg');
+        titleWrapper.style.display = 'none';
     } else {
         contentArea.classList.remove('scout-bg');
+        titleWrapper.style.display = 'flex';
+        // Update the title for non-scout tabs
+        const titleElement = titleWrapper.querySelector('.upgrade-pill h2');
+        titleElement.textContent = getTabTitle(tabName);
     }
-
-    // Update the title
-    const titleElement = titleWrapper.querySelector('.upgrade-pill h2');
-    titleElement.textContent = getTabTitle(tabName);
 
     // Update the content
     contentSection.innerHTML = window.getTabContent(tabName);
@@ -297,6 +298,9 @@ window.getTabContent = function(tabName) {
         case 'scout':
             return `
                 <div class="scout-content">
+                    <div class="scout-banner-container">
+                        <img src="assets/images/scouting/bannerbox.png" alt="Scout Banner" class="scout-banner-img">
+                    </div>
                     <div class="scout-buttons-bottom">
                         <div class="scout-option">
                             <img src="assets/images/scouting/1x.png" alt="1x Scout" class="scout-img-btn" onclick="performScout(1)">
