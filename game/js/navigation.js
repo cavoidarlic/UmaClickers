@@ -148,21 +148,28 @@ window.switchTab = function(tabName) {
     const contentArea = document.querySelector('.upgrade-panel');
     const titleWrapper = contentArea.querySelector('.upgrade-title-wrapper');
     const contentSection = contentArea.querySelector('.upgrade-section');
-    
+
+    // Set scout-bg class for Scout tab background
+    if (tabName === 'scout') {
+        contentArea.classList.add('scout-bg');
+    } else {
+        contentArea.classList.remove('scout-bg');
+    }
+
     // Update the title
     const titleElement = titleWrapper.querySelector('.upgrade-pill h2');
     titleElement.textContent = getTabTitle(tabName);
-    
+
     // Update the content
     contentSection.innerHTML = window.getTabContent(tabName);
     // If upgrades tab, update button states immediately
     if (tabName === 'upgrades' && window.updateUpgradeButtons) {
         window.updateUpgradeButtons();
     }
-    
+
     // Store current tab
     window.currentTab = tabName;
-    
+
     console.log(`Switched to tab: ${tabName}`);
 };
 
@@ -290,15 +297,12 @@ window.getTabContent = function(tabName) {
         case 'scout':
             return `
                 <div class="scout-content">
-                    <div class="scout-image-container">
-                        <img src="assets/images/scouting/uma.jpg" alt="Scout Banner" class="scout-banner">
-                    </div>
-                    <div class="scout-buttons" style="display: flex; gap: 2rem; justify-content: center; margin-top: 2rem;">
+                    <div class="scout-buttons-bottom">
                         <div class="scout-option">
-                            <img src="assets/images/scouting/1x.png" alt="1x Scout" class="scout-img-btn" onclick="performScout(1)" style="cursor:pointer; width:220px; border-radius:16px; box-shadow:0 4px 15px rgba(76,175,80,0.18);">
+                            <img src="assets/images/scouting/1x.png" alt="1x Scout" class="scout-img-btn" onclick="performScout(1)">
                         </div>
                         <div class="scout-option">
-                            <img src="assets/images/scouting/10x.png" alt="10x Scout" class="scout-img-btn" onclick="performScout(10)" style="cursor:pointer; width:220px; border-radius:16px; box-shadow:0 4px 15px rgba(76,175,80,0.18);">
+                            <img src="assets/images/scouting/10x.png" alt="10x Scout" class="scout-img-btn" onclick="performScout(10)">
                         </div>
                     </div>
                 </div>

@@ -1,3 +1,28 @@
+/* Scout tab full panel background */
+.upgrade-panel.scout-bg {
+    background: url('../../assets/images/scouting/background.png') center center/cover no-repeat !important;
+}
+/* Scout tab background and bottom buttons */
+.scout-bg {
+    position: relative;
+    min-height: 500px;
+    width: 100%;
+    background: url('../../assets/images/scouting/background.png') center center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 48px;
+}
+
+.scout-buttons-bottom {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    margin-bottom: 0;
+}
 * {
     margin: 0;
     padding: 0;
@@ -295,20 +320,6 @@ html, body, .game-container, .upgrade-panel, .character-selection-content, .char
     gap: 1.5rem;
 }
 
-.scout-image-container {
-    width: 100%;
-    max-width: 600px; /* Increased from 500px */
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.scout-banner {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-}
 
 .scout-buttons {
     display: flex;
