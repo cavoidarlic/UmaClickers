@@ -370,14 +370,14 @@ body {
 
 .song-selector {
     padding: 0 1rem;
-    height: 360px; /* fixed taller height for selector area */
+    height: 480px; /* taller selector area to fit larger covers */
 }
 
 .song-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-    max-width: 320px; /* reduced overall width */
+    gap: 22px;
+    max-width: 560px; /* increased overall width so covers are larger */
     margin: 0 auto;
 }
 
@@ -749,10 +749,13 @@ body {
 
 .random-option:hover {
     border-color: #ff5722;
+.song-option:hover {
+    transform: scale(1.05);
+}
     transform: scale(1.05);
     box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
-}
-
+    width: 160px;
+    height: 160px;
 .random-text {
     position: absolute;
     bottom: 0;
@@ -874,4 +877,5 @@ body {
     .song-cover {
         height: 60px;
     }
+}
 }
