@@ -291,6 +291,19 @@ html, body, .game-container, .upgrade-panel, .character-selection-content, .char
     padding: 0;
 }
 
+.jukebox-separator-container {
+    display: flex;
+    justify-content: center;
+    margin: 8px 0 12px 0;
+}
+
+.jukebox-separator {
+    max-width: 75%; /* reduced 10% from previous 80% */
+    height: auto;
+    opacity: 0.98;
+    pointer-events: none;
+}
+
 .current-song-info {
     background: #2d5d73;
     color: white;

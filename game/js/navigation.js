@@ -202,7 +202,11 @@ function getTabContent(tabName) {
                             </button>
                         </div>
                     </div>
-                    
+
+                    <div class="jukebox-separator-container">
+                        <img src="assets/images/seperator thingy.png" alt="separator" class="jukebox-separator">
+                    </div>
+
                     <div class="song-selector">
                         <div class="song-grid">
                             ${Object.keys(window.songData).map((songName, index) => {
