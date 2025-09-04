@@ -27,8 +27,16 @@ window.resetHover = function() {
 };
 
 window.clickCharacter = function(event) {
+    // Check for critical hit
+    const isCritical = Math.random() < window.gameState.criticalChance;
+    let moneyEarned = window.gameState.clickPower;
+    
+    if (isCritical) {
+        moneyEarned *= window.gameState.criticalMultiplier;
+    }
+    
     // award money
-    window.gameState.money += window.gameState.clickPower;
+    window.gameState.money += moneyEarned;
 
     // play click sound (small audio pool to avoid cutoffs)
     try {
@@ -77,12 +85,16 @@ window.clickCharacter = function(event) {
     startY = startY - 8;
 
     // Limit visuals per click to avoid spawning huge amounts; visual limit is separate from awarded money
-    const VISUAL_MONEY_PER_CLICK = 6;
-    const spawnCount = window.createFallingMoney(startX, startY, Math.min(window.gameState.clickPower, VISUAL_MONEY_PER_CLICK));
+    const VISUAL_MONEY_PER_CLICK = isCritical ? 12 : 6; // More visual money on critical
+    const spawnCount = window.createFallingMoney(startX, startY, Math.min(moneyEarned, VISUAL_MONEY_PER_CLICK));
 
-    if (Math.random() < window.gameState.caratChance) {
+    // Critical hits guarantee carat drops
+    const caratDropChance = isCritical ? 1.0 : window.gameState.caratChance;
+    
+    if (Math.random() < caratDropChance) {
         let spawnedCarats = 0;
-        for (let i = 0; i < window.gameState.caratAmount; i++) {
+        const caratAmount = isCritical ? window.gameState.caratAmount + 1 : window.gameState.caratAmount;
+        for (let i = 0; i < caratAmount; i++) {
             const spawned = window.createFallingCarat(startX, startY);
             if (spawned) spawnedCarats++;
         }

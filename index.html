@@ -50,53 +50,58 @@
                 </div>
                 <div class="upgrade-section">
                     <div class="upgrade-item">
-                        <h3>Training Boost</h3>
-                        <p>Increase money per click</p>
+                        <h3><img src="assets/images/icons/power.png" alt="Power" class="upgrade-icon"> Power</h3>
+                        <p>Increases money earned per click</p>
+                        <div class="upgrade-level">Level 0 → 1 money per click</div>
+                        <div class="upgrade-cost">
+                            <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
+                            <span>5</span>
+                        </div>
+                        <button class="upgrade-btn" onclick="buyUpgrade('power')">Buy</button>
+                    </div>
+                    
+                    <div class="upgrade-item">
+                        <h3><img src="assets/images/icons/speed.png" alt="Speed" class="upgrade-icon"> Speed</h3>
+                        <p>Generates passive money over time</p>
+                        <div class="upgrade-level">Level 0 → 0 money/sec</div>
                         <div class="upgrade-cost">
                             <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
                             <span>10</span>
                         </div>
-                        <button class="upgrade-btn" onclick="buyUpgrade('clickPower')">Buy</button>
+                        <button class="upgrade-btn" onclick="buyUpgrade('speed')">Buy</button>
                     </div>
                     
                     <div class="upgrade-item">
-                        <h3>Auto Training</h3>
-                        <p>Gain money automatically</p>
+                        <h3><img src="assets/images/icons/stamina.png" alt="Stamina" class="upgrade-icon"> Stamina</h3>
+                        <p>Improves auto-click efficiency and speed</p>
+                        <div class="upgrade-level">Level 0 → 0.2 clicks/sec</div>
+                        <div class="upgrade-cost">
+                            <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
+                            <span>20</span>
+                        </div>
+                        <button class="upgrade-btn" onclick="buyUpgrade('stamina')">Buy</button>
+                    </div>
+                    
+                    <div class="upgrade-item">
+                        <h3><img src="assets/images/icons/guts.png" alt="Guts" class="upgrade-icon"> Guts</h3>
+                        <p>Increases chance of critical clicks (3x money + guaranteed carat)</p>
+                        <div class="upgrade-level">Level 0 → 5.0% crit chance</div>
+                        <div class="upgrade-cost">
+                            <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
+                            <span>30</span>
+                        </div>
+                        <button class="upgrade-btn" onclick="buyUpgrade('guts')">Buy</button>
+                    </div>
+
+                    <div class="upgrade-item">
+                        <h3><img src="assets/images/icons/wit.png" alt="Wit" class="upgrade-icon"> Wit</h3>
+                        <p>Increases chance of finding valuable carats</p>
+                        <div class="upgrade-level">Level 0 → 5.0% carat chance</div>
                         <div class="upgrade-cost">
                             <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
                             <span>50</span>
                         </div>
-                        <button class="upgrade-btn" onclick="buyUpgrade('autoClick')">Buy</button>
-                    </div>
-                    
-                    <div class="upgrade-item">
-                        <h3>Speed Training</h3>
-                        <p>Faster auto money generation</p>
-                        <div class="upgrade-cost">
-                            <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
-                            <span>100</span>
-                        </div>
-                        <button class="upgrade-btn" onclick="buyUpgrade('autoSpeed')">Buy</button>
-                    </div>
-                    
-                    <div class="upgrade-item">
-                        <h3>Carat Chance</h3>
-                        <p>Increase chance to drop carats on click</p>
-                        <div class="upgrade-cost">
-                            <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
-                            <span id="caratChanceCost">200</span>
-                        </div>
-                        <button class="upgrade-btn" onclick="buyUpgrade('caratChance')">Buy</button>
-                    </div>
-
-                    <div class="upgrade-item">
-                        <h3>Carat Amount</h3>
-                        <p>Increase amount of carats spawned when dropped</p>
-                        <div class="upgrade-cost">
-                            <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
-                            <span id="caratAmountCost">300</span>
-                        </div>
-                        <button class="upgrade-btn" onclick="buyUpgrade('caratAmount')">Buy</button>
+                        <button class="upgrade-btn" onclick="buyUpgrade('wit')">Buy</button>
                     </div>
                 </div>
             </div>

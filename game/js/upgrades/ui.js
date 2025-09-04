@@ -1,50 +1,55 @@
 // upgrades/ui.js - connects DOM buttons to upgrade logic and updates costs/disabled states
 
-function buyUpgrade(upgradeType) {
+window.buyUpgrade = function(upgradeType) {
+    console.log('buyUpgrade called with:', upgradeType);
+    console.log('Current money:', window.gameState.money);
+    console.log('Upgrade cost:', window.gameState.upgrades[upgradeType]?.cost);
+    
     const applied = window.applyUpgrade(upgradeType);
+    console.log('Upgrade applied:', applied);
+    
     if (applied) {
         updateUpgradeButtons();
+        // Refresh the upgrades tab to show updated values
+        if (window.currentTab === 'upgrades') {
+            console.log('Refreshing upgrades tab');
+            const contentSection = document.querySelector('.upgrade-section');
+            if (contentSection && window.getTabContent) {
+                contentSection.innerHTML = window.getTabContent('upgrades');
+            } else {
+                console.error('Could not find content section or getTabContent function');
+            }
+        }
+    } else {
+        console.log('Upgrade not applied - insufficient money or invalid upgrade');
     }
-}
+};
 
 window.updateUpgradeButtons = function() {
-    // Update click power upgrade
-    const clickPowerBtn = document.querySelector('[onclick="buyUpgrade(\'clickPower\')"]');
-    if (clickPowerBtn) {
-        const clickPowerCost = clickPowerBtn.parentElement.querySelector('.upgrade-cost span');
-        clickPowerCost.textContent = window.gameState.upgrades.clickPower.cost;
-        clickPowerBtn.disabled = window.gameState.money < window.gameState.upgrades.clickPower.cost;
+    // Safety check to ensure upgrades exist
+    if (!window.gameState.upgrades) {
+        console.warn('Game state upgrades not initialized yet');
+        return;
     }
-
-    // auto click
-    const autoClickBtn = document.querySelector('[onclick="buyUpgrade(\'autoClick\')"]');
-    if (autoClickBtn) {
-        const autoClickCost = autoClickBtn.parentElement.querySelector('.upgrade-cost span');
-        autoClickCost.textContent = window.gameState.upgrades.autoClick.cost;
-        autoClickBtn.disabled = window.gameState.money < window.gameState.upgrades.autoClick.cost;
-    }
-
-    // auto speed
-    const autoSpeedBtn = document.querySelector('[onclick="buyUpgrade(\'autoSpeed\')"]');
-    if (autoSpeedBtn) {
-        const autoSpeedCost = autoSpeedBtn.parentElement.querySelector('.upgrade-cost span');
-        autoSpeedCost.textContent = window.gameState.upgrades.autoSpeed.cost;
-        autoSpeedBtn.disabled = window.gameState.money < window.gameState.upgrades.autoSpeed.cost;
-    }
-
-    // extra upgrades
-    const caratChanceBtn = document.querySelector('[onclick="buyUpgrade(\'caratChance\')"]');
-    const caratAmountBtn = document.querySelector('[onclick="buyUpgrade(\'caratAmount\')"]');
-    if (caratChanceBtn) {
-        const el = caratChanceBtn.parentElement.querySelector('.upgrade-cost span');
-        el.textContent = window.extraUpgrades.caratChance.cost;
-        caratChanceBtn.disabled = window.gameState.money < window.extraUpgrades.caratChance.cost;
-    }
-    if (caratAmountBtn) {
-        const el2 = caratAmountBtn.parentElement.querySelector('.upgrade-cost span');
-        el2.textContent = window.extraUpgrades.caratAmount.cost;
-        caratAmountBtn.disabled = window.gameState.money < window.extraUpgrades.caratAmount.cost;
-    }
+    
+    // Update all Uma stat upgrades
+    const statTypes = ['power', 'speed', 'stamina', 'guts', 'wit'];
+    statTypes.forEach(statType => {
+        // Safety check for each upgrade
+        if (!window.gameState.upgrades[statType]) {
+            console.warn(`Upgrade ${statType} not found in game state`);
+            return;
+        }
+        
+        const btn = document.querySelector(`[onclick="buyUpgrade('${statType}')"]`);
+        if (btn) {
+            const costSpan = btn.parentElement.querySelector('.upgrade-cost span');
+            if (costSpan) {
+                costSpan.textContent = window.gameState.upgrades[statType].cost;
+            }
+            btn.disabled = window.gameState.money < window.gameState.upgrades[statType].cost;
+        }
+    });
 };
 
 // apply subtle entrance animation for upgrade items

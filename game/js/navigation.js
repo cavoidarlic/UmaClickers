@@ -72,7 +72,7 @@ window.selectSong = function(songName) {
     // Update the jukebox display if currently on jukebox tab
     if (window.currentTab === 'jukebox') {
         const contentSection = document.querySelector('.upgrade-section');
-        contentSection.innerHTML = getTabContent('jukebox');
+        contentSection.innerHTML = window.getTabContent('jukebox');
     }
 };
 
@@ -116,7 +116,7 @@ window.togglePlayback = function() {
             window.currentlyPlayingSong = null;
             if (window.currentTab === 'jukebox') {
                 const contentSection = document.querySelector('.upgrade-section');
-                contentSection.innerHTML = getTabContent('jukebox');
+                contentSection.innerHTML = window.getTabContent('jukebox');
             }
         });
     }
@@ -124,7 +124,7 @@ window.togglePlayback = function() {
     // Update the play button
     if (window.currentTab === 'jukebox') {
         const contentSection = document.querySelector('.upgrade-section');
-        contentSection.innerHTML = getTabContent('jukebox');
+        contentSection.innerHTML = window.getTabContent('jukebox');
     }
 };
 
@@ -154,7 +154,7 @@ window.switchTab = function(tabName) {
     titleElement.textContent = getTabTitle(tabName);
     
     // Update the content
-    contentSection.innerHTML = getTabContent(tabName);
+    contentSection.innerHTML = window.getTabContent(tabName);
     
     // Store current tab
     window.currentTab = tabName;
@@ -175,7 +175,7 @@ function getTabTitle(tabName) {
     return titles[tabName] || 'Unknown';
 }
 
-function getTabContent(tabName) {
+window.getTabContent = function(tabName) {
     switch(tabName) {
         case 'jukebox':
             const currentSongData = window.songData[window.currentSong];
@@ -228,53 +228,58 @@ function getTabContent(tabName) {
         case 'upgrades':
             return `
                 <div class="upgrade-item">
-                    <h3>Training Boost</h3>
-                    <p>Increase money per click</p>
+                    <h3><img src="assets/images/icons/power.png" alt="Power" class="upgrade-icon"> Power</h3>
+                    <p>Increases money earned per click</p>
+                    <div class="upgrade-level">Level ${window.gameState.upgrades.power.level} → ${window.getStatValue('power')} money per click</div>
                     <div class="upgrade-cost">
                         <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
-                        <span>${window.gameState.upgrades.clickPower.cost}</span>
+                        <span>${window.gameState.upgrades.power.cost}</span>
                     </div>
-                    <button class="upgrade-btn" onclick="buyUpgrade('clickPower')">Buy</button>
+                    <button class="upgrade-btn" onclick="buyUpgrade('power')">Buy</button>
                 </div>
                 
                 <div class="upgrade-item">
-                    <h3>Auto Training</h3>
-                    <p>Gain money automatically</p>
+                    <h3><img src="assets/images/icons/speed.png" alt="Speed" class="upgrade-icon"> Speed</h3>
+                    <p>Generates passive money over time</p>
+                    <div class="upgrade-level">Level ${window.gameState.upgrades.speed.level} → ${window.getStatValue('speed')} money/sec</div>
                     <div class="upgrade-cost">
                         <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
-                        <span>${window.gameState.upgrades.autoClick.cost}</span>
+                        <span>${window.gameState.upgrades.speed.cost}</span>
                     </div>
-                    <button class="upgrade-btn" onclick="buyUpgrade('autoClick')">Buy</button>
+                    <button class="upgrade-btn" onclick="buyUpgrade('speed')">Buy</button>
                 </div>
                 
                 <div class="upgrade-item">
-                    <h3>Speed Training</h3>
-                    <p>Faster auto money generation</p>
+                    <h3><img src="assets/images/icons/stamina.png" alt="Stamina" class="upgrade-icon"> Stamina</h3>
+                    <p>Improves auto-click efficiency and speed</p>
+                    <div class="upgrade-level">Level ${window.gameState.upgrades.stamina.level} → ${window.getStatValue('stamina')} clicks/sec</div>
                     <div class="upgrade-cost">
                         <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
-                        <span>${window.gameState.upgrades.autoSpeed.cost}</span>
+                        <span>${window.gameState.upgrades.stamina.cost}</span>
                     </div>
-                    <button class="upgrade-btn" onclick="buyUpgrade('autoSpeed')">Buy</button>
+                    <button class="upgrade-btn" onclick="buyUpgrade('stamina')">Buy</button>
                 </div>
                 
                 <div class="upgrade-item">
-                    <h3>Carat Chance</h3>
-                    <p>Increase chance to drop carats on click</p>
+                    <h3><img src="assets/images/icons/guts.png" alt="Guts" class="upgrade-icon"> Guts</h3>
+                    <p>Increases chance of critical clicks (3x money + guaranteed carat)</p>
+                    <div class="upgrade-level">Level ${window.gameState.upgrades.guts.level} → ${window.getStatValue('guts')} crit chance</div>
                     <div class="upgrade-cost">
                         <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
-                        <span>${window.extraUpgrades.caratChance.cost}</span>
+                        <span>${window.gameState.upgrades.guts.cost}</span>
                     </div>
-                    <button class="upgrade-btn" onclick="buyUpgrade('caratChance')">Buy</button>
+                    <button class="upgrade-btn" onclick="buyUpgrade('guts')">Buy</button>
                 </div>
 
                 <div class="upgrade-item">
-                    <h3>Carat Amount</h3>
-                    <p>Increase amount of carats spawned when dropped</p>
+                    <h3><img src="assets/images/icons/wit.png" alt="Wit" class="upgrade-icon"> Wit</h3>
+                    <p>Increases chance of finding valuable carats</p>
+                    <div class="upgrade-level">Level ${window.gameState.upgrades.wit.level} → ${window.getStatValue('wit')} carat chance</div>
                     <div class="upgrade-cost">
                         <img src="assets/images/items/Monies.png" alt="Money" class="cost-icon">
-                        <span>${window.extraUpgrades.caratAmount.cost}</span>
+                        <span>${window.gameState.upgrades.wit.cost}</span>
                     </div>
-                    <button class="upgrade-btn" onclick="buyUpgrade('caratAmount')">Buy</button>
+                    <button class="upgrade-btn" onclick="buyUpgrade('wit')">Buy</button>
                 </div>
             `;
         
@@ -361,13 +366,7 @@ function getTabContent(tabName) {
     }
 }
 
-// Update upgrade buttons after tab switches to upgrades
+// Initialize navigation when page loads
 window.addEventListener('load', function() {
-    // Re-update upgrade buttons when switching back to upgrades tab
-    const originalUpdateUpgradeButtons = window.updateUpgradeButtons;
-    window.updateUpgradeButtons = function() {
-        if (window.currentTab === 'upgrades') {
-            originalUpdateUpgradeButtons();
-        }
-    };
+    console.log('Navigation system loaded');
 });

@@ -9,6 +9,7 @@ window.addEventListener('load', function() {
     window.startBackgroundAutoUpdate();
     window.updateDisplay();
     window.startAutoClicker();
+    window.startPassiveIncome(); // Start passive income from Speed stat
     window.updateUpgradeButtons();
 
     // Disable right-click context menu inside the game
