@@ -171,6 +171,15 @@ body {
     padding: 2rem;
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
+    /* Hide native scrollbar but keep scrolling functionality */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide WebKit scrollbars (Chrome, Safari, newer Edge) for the upgrade panel */
+.upgrade-panel::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 /* Navigation Column */
