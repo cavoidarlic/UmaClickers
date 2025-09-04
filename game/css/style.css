@@ -282,8 +282,8 @@ body {
     gap: 18px;
     max-width: 560px; /* reduced width */
     height: 200px; /* increased fixed height */
-    margin: -8px auto 20px auto; /* slightly overlap the pill and center */
-    border-radius: 10px;
+    margin: -36px auto 12px auto; /* moved down a bit to reduce overlap */
+    border-radius: 0; /* normal rectangle */
     box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 
