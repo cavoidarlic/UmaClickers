@@ -1,6 +1,123 @@
 // navigation.js - handles tab switching in the menu zone
 
 window.currentTab = 'upgrades'; // default tab
+window.currentSong = 'Go This Way'; // default selected song
+window.isPlaying = false;
+window.currentAudio = null;
+
+// Song data
+window.songData = {
+    'GIRLS LEGEND U': {
+        file: 'assets/sounds/Jukebox/GIRLS LEGEND U.mp3',
+        cover: 'assets/images/jukebox/GIRLS LEGEND U.png',
+        composer: 'Akihiro Honda (Cygames)',
+        arrangement: 'Kenta Higashiohji',
+        description: 'An epic anthem celebrating the legendary Uma Musume who paved the way for future generations.'
+    },
+    'Go This Way': {
+        file: 'assets/sounds/Jukebox/Go This Way.mp3',
+        cover: 'assets/images/jukebox/Go This Way.jpg',
+        composer: 'Heart\'s Cry',
+        arrangement: 'Heart\'s Cry',
+        description: 'This song is about the dreams we have, and the resolve it takes to keep running toward them. It\'s about moving forward, even when you\'re lost or scared. If you ever lose your way, we\'re here to tell you, "Go this way."'
+    },
+    'Irodori Phantasia': {
+        file: 'assets/sounds/Jukebox/Irodori Phantasia.mp3',
+        cover: 'assets/images/jukebox/Irodori Phantasia.webp',
+        composer: 'Akihiro Honda (Cygames)',
+        arrangement: 'Masanori Akita (INSPION)',
+        description: 'A colorful fantasy of dreams and aspirations, painting the track with vibrant melodies.'
+    },
+    'Make debut!': {
+        file: 'assets/sounds/Jukebox/Make Debut.mp3',
+        cover: 'assets/images/jukebox/Make debut!.jpg',
+        composer: 'Shun Aratame',
+        arrangement: 'Shun Aratame and Yuya Hirosawa',
+        description: 'The excitement and anticipation of making your first appearance on the racing stage.'
+    },
+    'NEXT FRONTIER': {
+        file: 'assets/sounds/Jukebox/NEXT FRONTIER.mp3',
+        cover: 'assets/images/jukebox/NEXT FRONTIER.png',
+        composer: 'Akihiko Yamaguchi',
+        arrangement: 'Akihiko Yamaguchi',
+        description: 'Breaking through barriers and exploring new possibilities beyond the horizon.'
+    },
+    'Our Blue Bird Days': {
+        file: 'assets/sounds/Jukebox/Our Blue Bird Days.mp3',
+        cover: 'assets/images/jukebox/Our Blue Bird Days.png',
+        composer: 'Cygames (corochi)',
+        arrangement: 'Ryota Fujii and Kotaro Odaka',
+        description: 'Nostalgic memories of peaceful days filled with hope and gentle melodies.'
+    },
+    'Umapyoi Densetsu': {
+        file: 'assets/sounds/Jukebox/Umapyoi Densetsu.mp3',
+        cover: 'assets/images/jukebox/Umapyoi Densetsu.webp',
+        composer: 'Akihiro Honda (Cygames)',
+        arrangement: 'Akihiro Honda (Cygames)',
+        description: 'The legendary tale of Uma Musume, celebrating their spirit and determination.'
+    },
+    'Bakushin Bakushin Bakushinshin': {
+        file: 'assets/sounds/Jukebox/Bakushin Bakushin Bakushinshin.mp3',
+        cover: 'assets/images/jukebox/BakushinBakushinBakushinshin.png',
+        composer: 'Cygames',
+        arrangement: 'Cygames',
+        description: 'An energetic and catchy tune that embodies the spirit of racing forward with unstoppable momentum.'
+    }
+};
+
+window.selectSong = function(songName) {
+    window.currentSong = songName;
+    // Stop current audio if playing
+    if (window.currentAudio) {
+        window.currentAudio.pause();
+        window.currentAudio = null;
+    }
+    window.isPlaying = false;
+    
+    // Update the jukebox display if currently on jukebox tab
+    if (window.currentTab === 'jukebox') {
+        const contentSection = document.querySelector('.upgrade-section');
+        contentSection.innerHTML = getTabContent('jukebox');
+    }
+};
+
+window.togglePlayback = function() {
+    const song = window.songData[window.currentSong];
+    if (!song) return;
+    
+    if (window.isPlaying) {
+        // Stop playback
+        if (window.currentAudio) {
+            window.currentAudio.pause();
+            window.currentAudio = null;
+        }
+        window.isPlaying = false;
+    } else {
+        // Start playback
+        window.currentAudio = new Audio(song.file);
+        window.currentAudio.play().catch(error => {
+            console.error('Error playing audio:', error);
+            alert('Error playing audio. Please check if the audio file exists.');
+            return;
+        });
+        window.isPlaying = true;
+        
+        // Reset when song ends
+        window.currentAudio.addEventListener('ended', function() {
+            window.isPlaying = false;
+            if (window.currentTab === 'jukebox') {
+                const contentSection = document.querySelector('.upgrade-section');
+                contentSection.innerHTML = getTabContent('jukebox');
+            }
+        });
+    }
+    
+    // Update the play button
+    if (window.currentTab === 'jukebox') {
+        const contentSection = document.querySelector('.upgrade-section');
+        contentSection.innerHTML = getTabContent('jukebox');
+    }
+};
 
 window.switchTab = function(tabName) {
     // Update active state for navigation buttons
@@ -52,17 +169,48 @@ function getTabTitle(tabName) {
 function getTabContent(tabName) {
     switch(tabName) {
         case 'jukebox':
+            const currentSongData = window.songData[window.currentSong];
+            const playButtonClass = window.isPlaying ? 'stop-button' : 'play-button';
+            const playButtonIcon = window.isPlaying ? '⏹' : '▶';
+            
             return `
-                <div class="tab-content">
-                    <h3>🎵 Music Player</h3>
-                    <p>Coming soon! Listen to your favorite Uma Musume tracks.</p>
-                    <div class="placeholder-content">
-                        <button class="upgrade-btn" disabled>Play Music</button>
-                        <button class="upgrade-btn" disabled>Sound Effects</button>
-                        <button class="upgrade-btn" disabled>Volume Settings</button>
+                <div class="jukebox-content">
+                    <div class="current-song-info">
+                        <div class="song-cover-container">
+                            <img src="${currentSongData.cover}" alt="${window.currentSong}" class="current-song-cover">
+                        </div>
+                        <div class="song-details">
+                            <h3 class="song-title">${window.currentSong}</h3>
+                            <div class="song-credits">
+                                <div class="credit-line">Composer: ${currentSongData.composer}</div>
+                                <div class="credit-line">Arrangement: ${currentSongData.arrangement}</div>
+                            </div>
+                            <div class="song-description">${currentSongData.description}</div>
+                        </div>
+                        <div class="play-button-container">
+                            <button class="play-control-btn ${playButtonClass}" onclick="togglePlayback()">
+                                ${playButtonIcon}
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="song-selector">
+                        <div class="song-grid">
+                            ${Object.keys(window.songData).map((songName, index) => {
+                                const isSelected = songName === window.currentSong;
+                                const song = window.songData[songName];
+                                return `
+                                    <div class="song-option ${isSelected ? 'selected' : ''}" onclick="selectSong('${songName}')">
+                                        <img src="${song.cover}" alt="${songName}" class="song-cover">
+                                        ${isSelected ? '<div class="selection-corners"></div>' : ''}
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
                     </div>
                 </div>
             `;
+        
         
         case 'upgrades':
             return `

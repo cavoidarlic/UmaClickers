@@ -268,6 +268,236 @@ body {
     border-left: 4px solid #6fdc3a;
 }
 
+/* Jukebox Styles */
+.jukebox-content {
+    padding: 0;
+}
+
+.current-song-info {
+    background: #2d5d73;
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: -2rem -2rem 2rem -2rem; /* extend to edges, no gap with pill */
+}
+
+.song-cover-container {
+    flex-shrink: 0;
+}
+
+.current-song-cover {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.song-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.song-title {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: white;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+}
+
+.song-credits {
+    margin-bottom: 12px;
+}
+
+.credit-line {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 3px;
+    font-weight: 600;
+}
+
+.song-description {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.play-button-container {
+    flex-shrink: 0;
+}
+
+.play-control-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    font-weight: bold;
+}
+
+.play-control-btn.play-button {
+    background: #6fdc3a;
+    color: white;
+}
+
+.play-control-btn.play-button:hover {
+    background: #5cb82a;
+    transform: scale(1.05);
+}
+
+.play-control-btn.stop-button {
+    background: white;
+    color: #8B4513;
+}
+
+.play-control-btn.stop-button:hover {
+    background: #f5f5f5;
+    transform: scale(1.05);
+}
+
+.song-selector {
+    padding: 0 1rem;
+}
+
+.song-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.song-grid .song-option:nth-child(n+5) {
+    grid-column: span 1;
+}
+
+.song-grid .song-option:nth-child(5),
+.song-grid .song-option:nth-child(6),
+.song-grid .song-option:nth-child(7),
+.song-grid .song-option:nth-child(8) {
+    margin: 0;
+}
+
+.song-option {
+    position: relative;
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.song-option:hover {
+    transform: scale(1.05);
+}
+
+.song-cover {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    display: block;
+}
+
+.song-option.selected {
+    position: relative;
+}
+
+.selection-corners {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.selection-corners::before,
+.selection-corners::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 3px solid #6fdc3a;
+}
+
+.selection-corners::before {
+    top: -1px;
+    left: -1px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.selection-corners::after {
+    top: -1px;
+    right: -1px;
+    border-left: none;
+    border-bottom: none;
+}
+
+.selection-corners {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.selection-corners::before,
+.selection-corners::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 3px solid #6fdc3a;
+}
+
+.selection-corners::before {
+    top: -1px;
+    left: -1px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.selection-corners::after {
+    bottom: -1px;
+    right: -1px;
+    border-left: none;
+    border-top: none;
+}
+
+.song-option.selected::before,
+.song-option.selected::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 3px solid #6fdc3a;
+    z-index: 1;
+}
+
+.song-option.selected::before {
+    top: -1px;
+    right: -1px;
+    border-left: none;
+    border-bottom: none;
+}
+
+.song-option.selected::after {
+    bottom: -1px;
+    left: -1px;
+    border-right: none;
+    border-top: none;
+}
+
 
 .upgrade-panel .upgrade-title-wrapper {
     display: flex;
@@ -600,5 +830,42 @@ body {
     
     .character-selection-content {
         padding: 2rem;
+    }
+    
+    /* Jukebox mobile styles */
+    .current-song-info {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .song-details {
+        order: 2;
+    }
+    
+    .play-button-container {
+        order: 3;
+    }
+    
+    .song-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+    
+    .song-grid .song-option:nth-child(n+5) {
+        grid-column: span 1;
+        margin: 0;
+    }
+    
+    .song-grid .song-option:nth-child(5),
+    .song-grid .song-option:nth-child(6),
+    .song-grid .song-option:nth-child(7),
+    .song-grid .song-option:nth-child(8) {
+        margin: 0;
+    }
+    
+    .song-cover {
+        height: 60px;
     }
 }
