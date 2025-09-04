@@ -3,7 +3,7 @@
 window.addEventListener('load', function() {
     // Check if character selection is needed (for debug, always show)
     window.checkCharacterSelection();
-    
+
     // load state first so other modules see it
     window.loadGameState();
     window.startBackgroundAutoUpdate();
@@ -11,6 +11,16 @@ window.addEventListener('load', function() {
     window.startAutoClicker();
     window.startPassiveIncome(); // Start passive income from Speed stat
     window.updateUpgradeButtons();
+
+    // Immediately render upgrades section to match save state
+    try {
+        const contentSection = document.querySelector('.upgrade-section');
+        if (contentSection && window.getTabContent) {
+            contentSection.innerHTML = window.getTabContent('upgrades');
+        }
+    } catch (err) {
+        console.warn('Could not render upgrades section on load:', err);
+    }
 
     // Disable right-click context menu inside the game
     document.addEventListener('contextmenu', function(e) {
