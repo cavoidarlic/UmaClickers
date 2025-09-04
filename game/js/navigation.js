@@ -289,13 +289,17 @@ window.getTabContent = function(tabName) {
         
         case 'scout':
             return `
-                <div class="tab-content">
-                    <h3>🎲 Scout Center</h3>
-                    <p>Spend Carats to scout for new Uma Musume companions!</p>
-                    <div class="placeholder-content">
-                        <button class="upgrade-btn" disabled>Standard Scout (10 Carats)</button>
-                        <button class="upgrade-btn" disabled>Premium Scout (25 Carats)</button>
-                        <button class="upgrade-btn" disabled>Limited Scout (50 Carats)</button>
+                <div class="scout-content">
+                    <div class="scout-image-container">
+                        <img src="assets/images/scouting/uma.jpg" alt="Scout Banner" class="scout-banner">
+                    </div>
+                    <div class="scout-buttons" style="display: flex; gap: 2rem; justify-content: center; margin-top: 2rem;">
+                        <div class="scout-option">
+                            <img src="assets/images/scouting/1x.png" alt="1x Scout" class="scout-img-btn" onclick="performScout(1)" style="cursor:pointer; width:220px; border-radius:16px; box-shadow:0 4px 15px rgba(76,175,80,0.18);">
+                        </div>
+                        <div class="scout-option">
+                            <img src="assets/images/scouting/10x.png" alt="10x Scout" class="scout-img-btn" onclick="performScout(10)" style="cursor:pointer; width:220px; border-radius:16px; box-shadow:0 4px 15px rgba(76,175,80,0.18);">
+                        </div>
                     </div>
                 </div>
             `;
@@ -374,3 +378,23 @@ window.getTabContent = function(tabName) {
 window.addEventListener('load', function() {
     console.log('Navigation system loaded');
 });
+
+// Scout functionality placeholder
+window.performScout = function(count) {
+    const costPer = 150;
+    const totalCost = count * costPer;
+    
+    if (window.gameState.carats < totalCost) {
+        alert(`Not enough Carats! You need ${totalCost} Carats but only have ${window.gameState.carats}.`);
+        return;
+    }
+    
+    // Placeholder for now - just show what would happen
+    alert(`Would perform ${count}x Scout for ${totalCost} Carats${count === 10 ? ' (1 SR+ Guaranteed!)' : ''}`);
+    
+    // TODO: Implement actual scouting logic
+    // - Deduct carats
+    // - Roll for Uma Musume
+    // - Add to inventory
+    // - Show results
+};

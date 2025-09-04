@@ -286,6 +286,114 @@ html, body, .game-container, .upgrade-panel, .character-selection-content, .char
     border-left: 4px solid #6fdc3a;
 }
 
+/* Scout Tab Styles */
+.scout-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.scout-image-container {
+    width: 100%;
+    max-width: 600px; /* Increased from 500px */
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.scout-banner {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.scout-buttons {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    max-width: 600px; /* Increased from 500px to match image */
+}
+
+.scout-option {
+    flex: 1;
+    position: relative; /* Allow ribbon to position relative to this */
+    margin: 0.5rem 0; /* Add margin to prevent ribbon cutoff */
+}
+
+.scout-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    border: none;
+    border-radius: 15px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    position: relative;
+    overflow: visible; /* Changed from hidden to allow ribbon overflow */
+}
+
+.scout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.scout-btn:active {
+    transform: translateY(0);
+}
+
+.scout-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.scout-btn-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+}
+
+.scout-count {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.scout-cost {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.carat-icon {
+    width: 52px;
+    height: 52px;
+}
+
+.guarantee-ribbon {
+    position: absolute;
+    top: -2px; /* nudged down slightly so it sits lower on the button */
+    right: -8px; /* keep horizontal offset */
+    background: linear-gradient(45deg, #ff4444, #cc0000);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    transform: rotate(15deg);
+    box-shadow: 0 2px 8px rgba(255, 68, 68, 0.4);
+    z-index: 10; /* Ensure it appears above other elements */
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
 /* Jukebox Styles */
 .jukebox-content {
     padding: 0;
