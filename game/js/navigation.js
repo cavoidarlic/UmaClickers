@@ -170,9 +170,9 @@ function getTabTitle(tabName) {
     const titles = {
         'jukebox': 'Jukebox',
         'upgrades': 'Upgrades',
-        'store': 'Store',
+        'scout': 'Scout',
         'races': 'Races',
-        'logs': 'Logs',
+        'inventory': 'Inventory',
         'stats': 'Stats',
         'menu': 'Menu'
     };
@@ -287,15 +287,15 @@ window.getTabContent = function(tabName) {
                 </div>
             `;
         
-        case 'store':
+        case 'scout':
             return `
                 <div class="tab-content">
-                    <h3>🛒 Item Store</h3>
-                    <p>Purchase special items and boosts for your Uma Musume!</p>
+                    <h3>🎲 Scout Center</h3>
+                    <p>Spend Carats to scout for new Uma Musume companions!</p>
                     <div class="placeholder-content">
-                        <button class="upgrade-btn" disabled>Energy Drinks</button>
-                        <button class="upgrade-btn" disabled>Training Equipment</button>
-                        <button class="upgrade-btn" disabled>Special Outfits</button>
+                        <button class="upgrade-btn" disabled>Standard Scout (10 Carats)</button>
+                        <button class="upgrade-btn" disabled>Premium Scout (25 Carats)</button>
+                        <button class="upgrade-btn" disabled>Limited Scout (50 Carats)</button>
                     </div>
                 </div>
             `;
@@ -313,15 +313,15 @@ window.getTabContent = function(tabName) {
                 </div>
             `;
         
-        case 'logs':
+        case 'inventory':
             return `
                 <div class="tab-content">
-                    <h3>📝 Activity Logs</h3>
-                    <p>View your training history and achievements.</p>
+                    <h3>🎒 Inventory</h3>
+                    <p>Manage your Uma Musume collection. Equip up to 4 Uma to assist you!</p>
                     <div class="placeholder-content">
-                        <button class="upgrade-btn" disabled>Training Log</button>
-                        <button class="upgrade-btn" disabled>Achievement Log</button>
-                        <button class="upgrade-btn" disabled>Race History</button>
+                        <button class="upgrade-btn" disabled>View Collection</button>
+                        <button class="upgrade-btn" disabled>Equip Uma (0/4)</button>
+                        <button class="upgrade-btn" disabled>Sort by Rarity</button>
                     </div>
                 </div>
             `;
