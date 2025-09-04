@@ -516,8 +516,8 @@ body {
 .upgrade-panel .upgrade-pill {
     background: linear-gradient(90deg, #6fdc3a 0%, #3ecb1e 100%);
     border-radius: 999px;
-    width: 75%;
-    min-width: 340px;
+    width: 80%;
+    min-width: 420px;
     height: 3.3em;
     padding: 0.2em 0;
     display: flex;
