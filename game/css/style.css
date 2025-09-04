@@ -279,8 +279,12 @@ body {
     padding: 20px;
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin: -2rem -2rem 2rem -2rem; /* extend to edges, no gap with pill */
+    gap: 18px;
+    max-width: 560px; /* reduced width */
+    height: 200px; /* increased fixed height */
+    margin: -8px auto 20px auto; /* slightly overlap the pill and center */
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 
 .song-cover-container {
@@ -288,8 +292,8 @@ body {
 }
 
 .current-song-cover {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     object-fit: cover;
     border-radius: 8px;
     border: 2px solid rgba(255, 255, 255, 0.2);
@@ -366,13 +370,14 @@ body {
 
 .song-selector {
     padding: 0 1rem;
+    height: 360px; /* fixed taller height for selector area */
 }
 
 .song-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    max-width: 400px;
+    gap: 18px;
+    max-width: 320px; /* reduced overall width */
     margin: 0 auto;
 }
 
@@ -393,6 +398,7 @@ body {
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.2s ease;
+    aspect-ratio: 1 / 1; /* force square */
 }
 
 .song-option:hover {
@@ -401,7 +407,7 @@ body {
 
 .song-cover {
     width: 100%;
-    height: 80px;
+    height: 100%;
     object-fit: cover;
     display: block;
 }
