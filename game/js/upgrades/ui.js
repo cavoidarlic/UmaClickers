@@ -9,16 +9,19 @@ window.buyUpgrade = function(upgradeType) {
     console.log('Upgrade applied:', applied);
     
     if (applied) {
-        updateUpgradeButtons();
         // Refresh the upgrades tab to show updated values
         if (window.currentTab === 'upgrades') {
             console.log('Refreshing upgrades tab');
             const contentSection = document.querySelector('.upgrade-section');
             if (contentSection && window.getTabContent) {
                 contentSection.innerHTML = window.getTabContent('upgrades');
+                // Immediately update button states after re-render
+                window.updateUpgradeButtons();
             } else {
                 console.error('Could not find content section or getTabContent function');
             }
+        } else {
+            window.updateUpgradeButtons();
         }
     } else {
         console.log('Upgrade not applied - insufficient money or invalid upgrade');
