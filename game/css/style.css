@@ -425,6 +425,22 @@ body {
     pointer-events: none;
 }
 
+/* Use an overlay image for the selected state to make the selection obvious */
+.song-option.selected .selection-corners {
+    background: url('../../assets/images/jukebox/select.png') center/contain no-repeat;
+    z-index: 2;
+    opacity: 1;
+    pointer-events: none; /* allow clicks to pass through to the tile */
+}
+
+/* hide the small corner stroke markers when using the image overlay */
+.song-option.selected .selection-corners::before,
+.song-option.selected .selection-corners::after,
+.song-option.selected::before,
+.song-option.selected::after {
+    display: none;
+}
+
 .selection-corners::before,
 .selection-corners::after {
     content: '';
