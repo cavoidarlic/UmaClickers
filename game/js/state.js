@@ -78,6 +78,12 @@ window.characterData = {
         defaultSprite: 'assets/images/characters/default/WinningTicketChibi1.webp',
         clickedSprite: 'assets/images/characters/default2/Winning_Ticket_Chibi1-2.webp'
     }
+    ,
+    goldship: {
+        name: 'Gold Ship',
+        defaultSprite: 'assets/images/characters/default/GoldShipChibi1.webp',
+        clickedSprite: 'assets/images/characters/default2/Gold_Ship_Chibi1-2.webp'
+    }
 };
 
 // Extra upgrades object kept separate so it's easier to split later
