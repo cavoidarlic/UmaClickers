@@ -155,6 +155,10 @@ window.switchTab = function(tabName) {
     
     // Update the content
     contentSection.innerHTML = window.getTabContent(tabName);
+    // If upgrades tab, update button states immediately
+    if (tabName === 'upgrades' && window.updateUpgradeButtons) {
+        window.updateUpgradeButtons();
+    }
     
     // Store current tab
     window.currentTab = tabName;
