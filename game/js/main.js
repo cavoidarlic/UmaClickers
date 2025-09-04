@@ -17,6 +17,8 @@ window.addEventListener('load', function() {
         const contentSection = document.querySelector('.upgrade-section');
         if (contentSection && window.getTabContent) {
             contentSection.innerHTML = window.getTabContent('upgrades');
+            // Immediately update button states
+            window.updateUpgradeButtons();
         }
     } catch (err) {
         console.warn('Could not render upgrades section on load:', err);
