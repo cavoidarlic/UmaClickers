@@ -312,17 +312,39 @@ html, body, .game-container, .upgrade-panel, .character-selection-content, .char
 
 .scout-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     width: 100%;
-    max-width: 600px; /* Increased from 500px to match image */
+    max-width: 600px;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
 }
 
 .scout-option {
-    flex: 1;
-    position: relative; /* Allow ribbon to position relative to this */
-    margin: 0.5rem 0; /* Add margin to prevent ribbon cutoff */
+    flex: 0 0 auto;
+    position: relative;
+    margin: 0;
+    background: transparent;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+/* Scout image button styling */
+.scout-img-btn {
+    cursor: pointer;
+    width: 220px;
+    border-radius: 16px;
+    box-shadow: none;
+    transition: transform 0.18s cubic-bezier(.4,2,.3,1);
+    background: transparent;
+    display: block;
+}
+.scout-img-btn:hover {
+    transform: scale(1.08);
+    z-index: 2;
+}
 .scout-btn {
     width: 100%;
     background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
