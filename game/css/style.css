@@ -458,7 +458,10 @@ html, body, .game-container, .upgrade-panel, .character-selection-content, .char
 
 /* Use an overlay image for the selected state to make the selection obvious */
 .song-option.selected .selection-corners {
-    background: url('../../assets/images/jukebox/select.png') center/contain no-repeat;
+    background-image: url('../../assets/images/jukebox/select.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 110% auto; /* make overlay 10% larger */
     z-index: 2;
     opacity: 1;
     pointer-events: none; /* allow clicks to pass through to the tile */
