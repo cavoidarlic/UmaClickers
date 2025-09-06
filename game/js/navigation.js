@@ -1,200 +1,165 @@
-// navigation.js - handles tab switching in the menu zone
-
-window.currentTab = 'upgrades'; // default tab
-window.currentSong = 'Go This Way'; // default selected song
+window.currentTab = 'upgrades';
+window.currentSong = 'Go This Way';
 window.isPlaying = false;
 window.currentAudio = null;
-window.currentlyPlayingSong = null; // track which song is actually playing
-
-// Song data
+window.currentlyPlayingSong = null;
 window.songData = {
-    'GIRLS LEGEND U': {
-        file: 'assets/sounds/Jukebox/GIRLS LEGEND U.mp3',
-        cover: 'assets/images/jukebox/GIRLS LEGEND U.png',
-        composer: 'Akihiro Honda (Cygames)',
-        arrangement: 'Kenta Higashiohji',
-        description: 'An epic anthem celebrating the legendary Uma Musume who paved the way for future generations.'
-    },
-    'Go This Way': {
-        file: 'assets/sounds/Jukebox/Go This Way.mp3',
-        cover: 'assets/images/jukebox/Go This Way.jpg',
-        composer: 'Heart\'s Cry',
-        arrangement: 'Heart\'s Cry',
-        description: 'This song is about the dreams we have, and the resolve it takes to keep running toward them. It\'s about moving forward, even when you\'re lost or scared. If you ever lose your way, we\'re here to tell you, "Go this way."'
-    },
-    'Irodori Phantasia': {
-        file: 'assets/sounds/Jukebox/Irodori Phantasia.mp3',
-        cover: 'assets/images/jukebox/Irodori Phantasia.webp',
-        composer: 'Akihiro Honda (Cygames)',
-        arrangement: 'Masanori Akita (INSPION)',
-        description: 'A colorful fantasy of dreams and aspirations, painting the track with vibrant melodies.'
-    },
-    'Make debut!': {
-        file: 'assets/sounds/Jukebox/Make Debut.mp3',
-        cover: 'assets/images/jukebox/Make debut!.jpg',
-        composer: 'Shun Aratame',
-        arrangement: 'Shun Aratame and Yuya Hirosawa',
-        description: 'The excitement and anticipation of making your first appearance on the racing stage.'
-    },
-    'NEXT FRONTIER': {
-        file: 'assets/sounds/Jukebox/NEXT FRONTIER.mp3',
-        cover: 'assets/images/jukebox/NEXT FRONTIER.png',
-        composer: 'Akihiko Yamaguchi',
-        arrangement: 'Akihiko Yamaguchi',
-        description: 'Breaking through barriers and exploring new possibilities beyond the horizon.'
-    },
-    'Our Blue Bird Days': {
-        file: 'assets/sounds/Jukebox/Our Blue Bird Days.mp3',
-        cover: 'assets/images/jukebox/Our Blue Bird Days.png',
-        composer: 'Cygames (corochi)',
-        arrangement: 'Ryota Fujii and Kotaro Odaka',
-        description: 'Nostalgic memories of peaceful days filled with hope and gentle melodies.'
-    },
-    'Umapyoi Densetsu': {
-        file: 'assets/sounds/Jukebox/Umapyoi Densetsu.mp3',
-        cover: 'assets/images/jukebox/Umapyoi Densetsu.webp',
-        composer: 'Akihiro Honda (Cygames)',
-        arrangement: 'Akihiro Honda (Cygames)',
-        description: 'The legendary tale of Uma Musume, celebrating their spirit and determination.'
-    },
-    'Bakushin Bakushin Bakushinshin': {
-        file: 'assets/sounds/Jukebox/Bakushin Bakushin Bakushinshin.mp3',
-        cover: 'assets/images/jukebox/BakushinBakushinBakushinshin.png',
-        composer: 'Cygames',
-        arrangement: 'Cygames',
-        description: 'An energetic and catchy tune that embodies the spirit of racing forward with unstoppable momentum.'
-    }
+  'GIRLS LEGEND U': {
+    file: 'assets/sounds/Jukebox/GIRLS LEGEND U.mp3',
+    cover: 'assets/images/jukebox/GIRLS LEGEND U.png',
+    composer: 'Akihiro Honda (Cygames)',
+    arrangement: 'Kenta Higashiohji',
+    description: 'An epic anthem celebrating the legendary Uma Musume who paved the way for future generations.'
+  },
+  'Go This Way': {
+    file: 'assets/sounds/Jukebox/Go This Way.mp3',
+    cover: 'assets/images/jukebox/Go This Way.jpg',
+    composer: 'Heart\'s Cry',
+    arrangement: 'Heart\'s Cry',
+    description: 'This song is about the dreams we have, and the resolve it takes to keep running toward them. It\'s about moving forward, even when you\'re lost or scared. If you ever lose your way, we\'re here to tell you, "Go this way."'
+  },
+  'Irodori Phantasia': {
+    file: 'assets/sounds/Jukebox/Irodori Phantasia.mp3',
+    cover: 'assets/images/jukebox/Irodori Phantasia.webp',
+    composer: 'Akihiro Honda (Cygames)',
+    arrangement: 'Masanori Akita (INSPION)',
+    description: 'A colorful fantasy of dreams and aspirations, painting the track with vibrant melodies.'
+  },
+  'Make debut!': {
+    file: 'assets/sounds/Jukebox/Make Debut.mp3',
+    cover: 'assets/images/jukebox/Make debut!.jpg',
+    composer: 'Shun Aratame',
+    arrangement: 'Shun Aratame and Yuya Hirosawa',
+    description: 'The excitement and anticipation of making your first appearance on the racing stage.'
+  },
+  'NEXT FRONTIER': {
+    file: 'assets/sounds/Jukebox/NEXT FRONTIER.mp3',
+    cover: 'assets/images/jukebox/NEXT FRONTIER.png',
+    composer: 'Akihiko Yamaguchi',
+    arrangement: 'Akihiko Yamaguchi',
+    description: 'Breaking through barriers and exploring new possibilities beyond the horizon.'
+  },
+  'Our Blue Bird Days': {
+    file: 'assets/sounds/Jukebox/Our Blue Bird Days.mp3',
+    cover: 'assets/images/jukebox/Our Blue Bird Days.png',
+    composer: 'Cygames (corochi)',
+    arrangement: 'Ryota Fujii and Kotaro Odaka',
+    description: 'Nostalgic memories of peaceful days filled with hope and gentle melodies.'
+  },
+  'Umapyoi Densetsu': {
+    file: 'assets/sounds/Jukebox/Umapyoi Densetsu.mp3',
+    cover: 'assets/images/jukebox/Umapyoi Densetsu.webp',
+    composer: 'Akihiro Honda (Cygames)',
+    arrangement: 'Akihiro Honda (Cygames)',
+    description: 'The legendary tale of Uma Musume, celebrating their spirit and determination.'
+  },
+  'Bakushin Bakushin Bakushinshin': {
+    file: 'assets/sounds/Jukebox/Bakushin Bakushin Bakushinshin.mp3',
+    cover: 'assets/images/jukebox/BakushinBakushinBakushinshin.png',
+    composer: 'Cygames',
+    arrangement: 'Cygames',
+    description: 'An energetic and catchy tune that embodies the spirit of racing forward with unstoppable momentum.'
+  }
 };
-
-window.selectSong = function(songName) {
-    window.currentSong = songName;
-    
-    // Update the jukebox display if currently on jukebox tab
-    if (window.currentTab === 'jukebox') {
+window.selectSong = function (songName) {
+  window.currentSong = songName;
+  if (window.currentTab === 'jukebox') {
+    const contentSection = document.querySelector('.upgrade-section');
+    contentSection.innerHTML = window.getTabContent('jukebox');
+  }
+};
+window.togglePlayback = function () {
+  const song = window.songData[window.currentSong];
+  if (!song) return;
+  if (window.isPlaying) {
+    if (window.currentlyPlayingSong === window.currentSong) {
+      if (window.currentAudio) {
+        window.currentAudio.pause();
+        window.currentAudio = null;
+      }
+      window.isPlaying = false;
+      window.currentlyPlayingSong = null;
+    } else {
+      if (window.currentAudio) {
+        window.currentAudio.pause();
+        window.currentAudio = null;
+      }
+      window.isPlaying = false;
+      window.currentlyPlayingSong = null;
+    }
+  } else {
+    window.currentAudio = new Audio(song.file);
+    window.currentAudio.play().catch(error => {
+      console.error('Error playing audio:', error);
+      alert('Error playing audio. Please check if the audio file exists.');
+      return;
+    });
+    window.isPlaying = true;
+    window.currentlyPlayingSong = window.currentSong;
+    window.currentAudio.addEventListener('ended', function () {
+      window.isPlaying = false;
+      window.currentlyPlayingSong = null;
+      if (window.currentTab === 'jukebox') {
         const contentSection = document.querySelector('.upgrade-section');
         contentSection.innerHTML = window.getTabContent('jukebox');
-    }
-};
-
-window.togglePlayback = function() {
-    const song = window.songData[window.currentSong];
-    if (!song) return;
-    // If something is playing
-    if (window.isPlaying) {
-        // If the currently playing song is the same as the selected one -> stop
-        if (window.currentlyPlayingSong === window.currentSong) {
-            if (window.currentAudio) {
-                window.currentAudio.pause();
-                window.currentAudio = null;
-            }
-            window.isPlaying = false;
-            window.currentlyPlayingSong = null;
-        } else {
-            // Different song is selected while another is playing -> stop the current playback
-            // (do not auto-start the newly selected song)
-            if (window.currentAudio) {
-                window.currentAudio.pause();
-                window.currentAudio = null;
-            }
-            window.isPlaying = false;
-            window.currentlyPlayingSong = null;
-        }
-    } else {
-        // Nothing is playing -> start the selected song
-        window.currentAudio = new Audio(song.file);
-        window.currentAudio.play().catch(error => {
-            console.error('Error playing audio:', error);
-            alert('Error playing audio. Please check if the audio file exists.');
-            return;
-        });
-        window.isPlaying = true;
-        window.currentlyPlayingSong = window.currentSong;
-
-        // Reset when song ends
-        window.currentAudio.addEventListener('ended', function() {
-            window.isPlaying = false;
-            window.currentlyPlayingSong = null;
-            if (window.currentTab === 'jukebox') {
-                const contentSection = document.querySelector('.upgrade-section');
-                contentSection.innerHTML = window.getTabContent('jukebox');
-            }
-        });
-    }
-    
-    // Update the play button
-    if (window.currentTab === 'jukebox') {
-        const contentSection = document.querySelector('.upgrade-section');
-        contentSection.innerHTML = window.getTabContent('jukebox');
-    }
-};
-
-window.switchTab = function(tabName) {
-    // Update active state for navigation buttons
-    const navButtons = document.querySelectorAll('.nav-button');
-    navButtons.forEach(button => {
-        button.classList.remove('active');
+      }
     });
-    
-    // Find and activate the clicked button
-    const clickedButton = Array.from(navButtons).find(button => {
-        const text = button.querySelector('.nav-button-text').textContent.toLowerCase();
-        return text === tabName.toLowerCase();
-    });
-    if (clickedButton) {
-        clickedButton.classList.add('active');
-    }
-    
-    // Update the content area
-    const contentArea = document.querySelector('.menu-panel');
-    const titleWrapper = contentArea.querySelector('.upgrade-title-wrapper');
-    const contentSection = contentArea.querySelector('.upgrade-section');
-
-    // Set scout-bg class for Scout tab background and hide title for Scout
-    if (tabName === 'scout') {
-        contentArea.classList.add('scout-bg');
-        titleWrapper.style.display = 'none';
-    } else {
-        contentArea.classList.remove('scout-bg');
-        titleWrapper.style.display = 'flex';
-        // Update the title for non-scout tabs
-        const titleElement = titleWrapper.querySelector('.upgrade-pill h2');
-        titleElement.textContent = getTabTitle(tabName);
-    }
-
-    // Update the content
-    contentSection.innerHTML = window.getTabContent(tabName);
-    // If upgrades tab, update button states immediately
-    if (tabName === 'upgrades' && window.updateUpgradeButtons) {
-        window.updateUpgradeButtons();
-    }
-
-    // Store current tab
-    window.currentTab = tabName;
-
-    console.log(`Switched to tab: ${tabName}`);
+  }
+  if (window.currentTab === 'jukebox') {
+    const contentSection = document.querySelector('.upgrade-section');
+    contentSection.innerHTML = window.getTabContent('jukebox');
+  }
 };
-
+window.switchTab = function (tabName) {
+  const navButtons = document.querySelectorAll('.nav-button');
+  navButtons.forEach(button => {
+    button.classList.remove('active');
+  });
+  const clickedButton = Array.from(navButtons).find(button => {
+    const text = button.querySelector('.nav-button-text').textContent.toLowerCase();
+    return text === tabName.toLowerCase();
+  });
+  if (clickedButton) {
+    clickedButton.classList.add('active');
+  }
+  const contentArea = document.querySelector('.menu-panel');
+  const titleWrapper = contentArea.querySelector('.upgrade-title-wrapper');
+  const contentSection = contentArea.querySelector('.upgrade-section');
+  if (tabName === 'scout') {
+    contentArea.classList.add('scout-bg');
+    titleWrapper.style.display = 'none';
+  } else {
+    contentArea.classList.remove('scout-bg');
+    titleWrapper.style.display = 'flex';
+    const titleElement = titleWrapper.querySelector('.upgrade-pill h2');
+    titleElement.textContent = getTabTitle(tabName);
+  }
+  contentSection.innerHTML = window.getTabContent(tabName);
+  if (tabName === 'upgrades' && window.updateUpgradeButtons) {
+    window.updateUpgradeButtons();
+  }
+  window.currentTab = tabName;
+  console.log(`Switched to tab: ${tabName}`);
+};
 function getTabTitle(tabName) {
-    const titles = {
-        'jukebox': 'Jukebox',
-        'upgrades': 'Upgrades',
-        'scout': 'Scout',
-        'races': 'Races',
-        'inventory': 'Inventory',
-        'stats': 'Stats',
-        'menu': 'Menu'
-    };
-    return titles[tabName] || 'Unknown';
+  const titles = {
+    'jukebox': 'Jukebox',
+    'upgrades': 'Upgrades',
+    'scout': 'Scout',
+    'races': 'Races',
+    'inventory': 'Inventory',
+    'stats': 'Stats',
+    'menu': 'Menu'
+  };
+  return titles[tabName] || 'Unknown';
 }
-
-window.getTabContent = function(tabName) {
-    switch(tabName) {
-        case 'jukebox':
-            const currentSongData = window.songData[window.currentSong];
-            const playButtonClass = window.isPlaying ? 'stop-button' : 'play-button';
-            const playButtonIcon = window.isPlaying ? '⏹' : '▶';
-            
-            return `
+window.getTabContent = function (tabName) {
+  switch (tabName) {
+    case 'jukebox':
+      const currentSongData = window.songData[window.currentSong];
+      const playButtonClass = window.isPlaying ? 'stop-button' : 'play-button';
+      const playButtonIcon = window.isPlaying ? '⏹' : '▶';
+      return `
                 <div class="jukebox-content">
                     <div class="current-song-info">
                         <div class="song-cover-container">
@@ -222,23 +187,21 @@ window.getTabContent = function(tabName) {
                     <div class="song-selector">
                         <div class="song-grid">
                             ${Object.keys(window.songData).map((songName, index) => {
-                                const isSelected = songName === window.currentSong;
-                                const song = window.songData[songName];
-                                return `
+        const isSelected = songName === window.currentSong;
+        const song = window.songData[songName];
+        return `
                                     <div class="song-option ${isSelected ? 'selected' : ''}" onclick="selectSong('${songName}')">
                                         <img src="${song.cover}" alt="${songName}" class="song-cover">
                                         ${isSelected ? '<div class="selection-corners"></div>' : ''}
                                     </div>
                                 `;
-                            }).join('')}
+      }).join('')}
                         </div>
                     </div>
                 </div>
             `;
-        
-        
-        case 'upgrades':
-            return `
+    case 'upgrades':
+      return `
                 <div class="upgrade-item">
                     <h3><img src="assets/images/icons/power.png" alt="Power" class="upgrade-icon"> Power</h3>
                     <p>Increases money earned per click</p>
@@ -294,9 +257,8 @@ window.getTabContent = function(tabName) {
                     <button class="upgrade-btn" onclick="buyUpgrade('wit')">Buy</button>
                 </div>
             `;
-        
-        case 'scout':
-            return `
+    case 'scout':
+      return `
                 <div class="scout-content">
                     <div class="scout-banner-container">
                         <img src="assets/images/scouting/bannerbox.png" alt="Scout Banner" class="scout-banner-img">
@@ -311,9 +273,8 @@ window.getTabContent = function(tabName) {
                     </div>
                 </div>
             `;
-        
-        case 'races':
-            return `
+    case 'races':
+      return `
                 <div class="tab-content">
                     <h3>🏆 Race Management</h3>
                     <p>Enter races and compete for prizes!</p>
@@ -324,9 +285,8 @@ window.getTabContent = function(tabName) {
                     </div>
                 </div>
             `;
-        
-        case 'inventory':
-            return `
+    case 'inventory':
+      return `
                 <div class="tab-content">
                     <h3>🎒 Inventory</h3>
                     <p>Manage your Uma Musume collection. Equip up to 4 Uma to assist you!</p>
@@ -337,9 +297,8 @@ window.getTabContent = function(tabName) {
                     </div>
                 </div>
             `;
-        
-        case 'stats':
-            return `
+    case 'stats':
+      return `
                 <div class="tab-content">
                     <h3>📊 Statistics</h3>
                     <p>View detailed statistics about your gameplay.</p>
@@ -362,9 +321,8 @@ window.getTabContent = function(tabName) {
                     </div>
                 </div>
             `;
-        
-        case 'menu':
-            return `
+    case 'menu':
+      return `
                 <div class="tab-content">
                     <h3>☰ Game Menu</h3>
                     <p>Game settings and options.</p>
@@ -376,33 +334,19 @@ window.getTabContent = function(tabName) {
                     </div>
                 </div>
             `;
-        
-        default:
-            return `<div class="tab-content"><h3>Coming Soon</h3><p>This tab is under development.</p></div>`;
-    }
-}
-
-// Initialize navigation when page loads
-window.addEventListener('load', function() {
-    console.log('Navigation system loaded');
+    default:
+      return `<div class="tab-content"><h3>Coming Soon</h3><p>This tab is under development.</p></div>`;
+  }
+};
+window.addEventListener('load', function () {
+  console.log('Navigation system loaded');
 });
-
-// Scout functionality placeholder
-window.performScout = function(count) {
-    const costPer = 150;
-    const totalCost = count * costPer;
-    
-    if (window.gameState.carats < totalCost) {
-        alert(`Not enough Carats! You need ${totalCost} Carats but only have ${window.gameState.carats}.`);
-        return;
-    }
-    
-    // Placeholder for now - just show what would happen
-    alert(`Would perform ${count}x Scout for ${totalCost} Carats${count === 10 ? ' (1 SR+ Guaranteed!)' : ''}`);
-    
-    // TODO: Implement actual scouting logic
-    // - Deduct carats
-    // - Roll for Uma Musume
-    // - Add to inventory
-    // - Show results
+window.performScout = function (count) {
+  const costPer = 150;
+  const totalCost = count * costPer;
+  if (window.gameState.carats < totalCost) {
+    alert(`Not enough Carats! You need ${totalCost} Carats but only have ${window.gameState.carats}.`);
+    return;
+  }
+  alert(`Would perform ${count}x Scout for ${totalCost} Carats${count === 10 ? ' (1 SR+ Guaranteed!)' : ''}`);
 };

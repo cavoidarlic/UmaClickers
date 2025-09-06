@@ -1,11 +1,8 @@
-// animations.js - floating money/carat animations and small utilities
-// particle limits to avoid too many DOM elements causing lag
-window.PARTICLE_LIMIT = 60; // max concurrent particles
+window.PARTICLE_LIMIT = 60; 
 window.activeParticles = 0;
 
 window.createFallingMoney = function(x, y, count = 1) {
     const gamePanel = document.querySelector('.game-panel');
-    // clamp requested count to available particle slots
     const requested = Math.max(1, Math.floor(count));
     const available = Math.max(0, window.PARTICLE_LIMIT - window.activeParticles);
     const spawnCount = Math.min(requested, available);
@@ -66,7 +63,6 @@ window.createFallingMoney = function(x, y, count = 1) {
 };
 
 window.createFallingCarat = function(x, y) {
-    // respect global particle cap
     if (window.activeParticles >= window.PARTICLE_LIMIT) return false;
 
     const img = document.createElement('img');
@@ -121,7 +117,7 @@ window.createFallingCarat = function(x, y) {
     return true;
 };
 
-// small helper for updating display
+
 window.updateDisplay = function() {
     const moneyEl = document.getElementById('moneyCount');
     const caratEl = document.getElementById('caratCount');
@@ -129,7 +125,6 @@ window.updateDisplay = function() {
     if (caratEl) caratEl.textContent = Math.floor(window.gameState.carats);
 };
 
-// style injection for animations
 (function injectAnimationStyle(){
     const style = document.createElement('style');
     style.textContent = `
@@ -141,7 +136,6 @@ window.updateDisplay = function() {
     document.head.appendChild(style);
 })();
 
-// prevent images from being selected or dragged via CSS
 (function injectDragPrevention(){
         const style = document.createElement('style');
         style.textContent = `

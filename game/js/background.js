@@ -1,4 +1,3 @@
-// background.js - sets background image based on current time
 function setBackgroundByTime() {
     const now = new Date();
     const hour = now.getHours();
@@ -20,7 +19,6 @@ function setBackgroundByTime() {
     console.log(`Current time: ${hour}:${now.getMinutes()}, Background: ${backgroundImage}`);
 }
 
-// update every minute
 window.startBackgroundAutoUpdate = function() {
     setBackgroundByTime();
     setInterval(setBackgroundByTime, 60000);
